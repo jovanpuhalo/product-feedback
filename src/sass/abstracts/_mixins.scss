@@ -1,0 +1,6 @@
+@mixin gridCellSetings {
+  justify-self: stretch;
+  background-color: $color-white;
+  border-radius: 1rem;
+  color: $color-white;
+}

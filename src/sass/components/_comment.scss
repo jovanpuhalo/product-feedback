@@ -1,0 +1,73 @@
+.comments {
+  background-color: $color-white;
+  width: 100%;
+  max-width: 71.4rem;
+  border-radius: 1rem;
+  padding: 2rem 3.2rem;
+
+  &__number {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+}
+
+.comment {
+  width: 100%;
+  // height: 200px;
+  padding: 2rem 0;
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+
+    &__photo {
+      width: 5rem;
+      height: 5rem;
+      & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    &__user {
+      margin-left: 2.5rem;
+      & :first-child {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+      & :last-child {
+        display: block;
+        font-size: 1.5rem;
+        color: $color-prymary-text;
+      }
+    }
+    &__reply {
+      margin-left: auto;
+      font-size: 1.5rem;
+      color: $color-primary-button-text;
+      font-weight: 800;
+      & :first-child {
+        cursor: pointer;
+      }
+      &__edit-delete {
+        color: $color-prymary-text;
+        cursor: pointer;
+        & :first-child:hover {
+          color: rgba(205, 6, 6, 0.677);
+        }
+        & :last-child:hover {
+          color: rgba(51, 50, 50, 0.508);
+        }
+      }
+    }
+  }
+  &__text {
+    margin-top: 2rem;
+    margin-left: 7.5rem;
+    text-align: justify;
+    color: $color-prymary-text;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+  }
+}

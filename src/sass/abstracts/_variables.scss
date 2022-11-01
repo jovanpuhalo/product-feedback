@@ -1,0 +1,21 @@
+$color-background-body: rgb(233, 235, 252); // body background
+
+$color-primary-button: rgb(173, 31, 234); // button --login, addFeedback
+$color-primary-button-light: rgb(199, 90, 246); //hover button
+
+//filter button text,filter button active, arrow/ focus input,edit button,voted feedback
+$color-primary-button-text: rgb(70, 97, 230);
+$color-primary-button-hover: rgb(207, 215, 255); //filter button hover
+$color-primary-header: rgb(55, 63, 104); // suggestions header/title/user name/comments
+$color-white: rgb(255, 255, 255); //background --login, font color
+$color-white-lite: rgba(255, 255, 255, 0.5); //feedback board text
+$color-primary-grey: rgb(242, 244, 254); //background -- filter button, vote
+$color-prymary-text: rgb(100, 113, 150); // text roadmap, suggestion-publish , suggestion description
+$color-primary-button-cancel: rgba(58, 67, 116);
+//Roadmap colors
+$color-planned: #f49f85;
+$color-in-progres: #ad1fea;
+$color-live: #62bcfa;
+
+//font
+$font-primary: "Jost", sans-serif;

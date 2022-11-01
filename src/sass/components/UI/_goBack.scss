@@ -1,0 +1,15 @@
+.go-back {
+  width: fit-content;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  color: $color-prymary-text;
+  gap: 1.5rem;
+  cursor: pointer;
+
+  &__icon {
+    font-size: 2rem;
+    color: $color-primary-button-text;
+  }
+}

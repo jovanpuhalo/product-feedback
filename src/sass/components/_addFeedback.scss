@@ -1,0 +1,88 @@
+.add-feedback {
+  margin-top: 5rem;
+  position: relative;
+  background-color: $color-white;
+  border-radius: 1rem;
+  padding: 3rem;
+  padding-top: 6rem;
+
+  //   animation: moveUp 0.5s ease-in forwards;
+  & h2 {
+    font-size: 2.2rem;
+    color: $color-primary-header;
+    margin-bottom: 3rem;
+  }
+  &__icon {
+    position: absolute;
+    top: -2rem;
+    // translate: 0 calc(-40% - 3rem);
+  }
+
+  &__controls {
+    position: relative;
+    padding-bottom: 3rem;
+    & [data-title] {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: $color-primary-header;
+      margin-bottom: 0.5rem;
+    }
+    & [data-dscription] {
+      font-size: 1.4rem;
+      color: $color-prymary-text;
+      margin-bottom: 1rem;
+    }
+    & input,
+    & textarea,
+    & select {
+      position: relative;
+      width: 100%;
+      padding: 1rem;
+      color: $color-prymary-text;
+      background-color: $color-background-body;
+      border-radius: 1rem;
+      outline: none;
+      border: 1px solid transparent;
+      resize: none;
+      appearance: none;
+
+      &:focus {
+        border-color: $color-primary-button-text;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    &__error {
+      color: red;
+      font-size: 1.3rem;
+      position: absolute;
+      bottom: 1rem;
+      right: 0;
+    }
+  }
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 1.3rem;
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+}
+.error {
+  & input,
+  & textarea {
+    outline: 1px solid red;
+
+    &:focus-visible,
+    &:active,
+    &:hover {
+      outline: 1px solid red;
+    }
+  }
+}

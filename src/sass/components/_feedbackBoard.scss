@@ -1,0 +1,22 @@
+.feedback-board {
+  grid-column: feedbackBoard-start/feedbackBoard-end;
+  grid-row: feedbackBoard-start / feedbackFlter-start;
+
+  @include gridCellSetings;
+
+  padding: 5rem 3rem;
+  background-image: url("../../assets/desktop/background-header.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  & h1 {
+    font-size: 2rem;
+  }
+  & h4 {
+    font-size: 1.5rem;
+    color: $color-white-lite;
+  }
+}

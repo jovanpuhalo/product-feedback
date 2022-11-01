@@ -1,0 +1,18 @@
+.user-menu-layout {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2rem;
+  cursor: pointer;
+  z-index: 12;
+
+  position: relative;
+}
+
+.spinner-layout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}

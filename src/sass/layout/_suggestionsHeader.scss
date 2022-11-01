@@ -1,0 +1,39 @@
+@use "../abstracts/variables";
+
+.suggestions-header {
+  grid-column: suggestion-start/suggestion-end;
+  grid-row: 1/2;
+
+  max-width: 73rem;
+  height: 100%;
+  border-radius: 1rem;
+  background-color: variables.$color-primary-header;
+
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  color: rgb(197, 198, 202);
+
+  & button {
+    margin-left: auto;
+  }
+
+  & img {
+    margin-right: 2rem;
+  }
+
+  &__number {
+    display: flex;
+    width: 15rem;
+    color: $color-white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right: 3rem;
+  }
+  &__sort {
+    color: $color-white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-right: 1rem;
+  }
+}

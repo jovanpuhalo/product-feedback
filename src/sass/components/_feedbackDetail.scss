@@ -1,0 +1,53 @@
+.feedback-detail__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  //   height: auto;
+  padding-bottom: 2rem;
+}
+
+.add-comment {
+  margin-top: 2rem;
+  background-color: $color-white;
+  border-radius: 1rem;
+  padding: 2rem 3.2rem;
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+  }
+
+  & textarea {
+    margin-bottom: 3rem;
+    width: 100%;
+    padding: 2rem;
+    color: $color-prymary-text;
+    background-color: $color-background-body;
+    border-radius: 1rem;
+    outline: none;
+    border: 1px solid transparent;
+    resize: vertical;
+    appearance: none;
+    font-family: inherit;
+    font-size: 1.7rem;
+
+    &:focus {
+      border-color: $color-primary-button-text;
+      color: rgba(0, 0, 0, 0.5);
+    }
+    &::placeholder {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__character-button {
+    & :first-child {
+      font-size: 1.5rem;
+      color: $color-prymary-text;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}

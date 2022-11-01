@@ -1,0 +1,74 @@
+.user {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0 1rem;
+  padding: 0 2rem;
+
+  &__photo {
+    width: 5rem;
+    height: 5rem;
+    grid-column: 1/2;
+    grid-row: 1/-1;
+    object-fit: cover;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  &__name {
+    // grid-column: 2/3;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $color-primary-header;
+    align-self: center;
+  }
+  &__date-published,
+  &__username {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: $color-prymary-text;
+  }
+}
+
+.login-menu-button {
+  position: relative;
+  width: 2.4rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+
+  // @media screen and (min-width: 50em) {
+  //   display: none;
+  // }
+
+  & > div {
+    width: 100%;
+    height: 4px;
+    background-color: $color-primary-header;
+    border-radius: 2px;
+  }
+
+  &__close {
+    cursor: pointer;
+    & :nth-child(1) {
+      transform-origin: top left;
+      rotate: 45deg;
+      transition: all 0.3s;
+    }
+    & :nth-child(2) {
+      opacity: 0;
+      transition: all 0.2s;
+    }
+    & :nth-child(3) {
+      transform-origin: bottom left;
+
+      rotate: -45deg;
+      transition: all 0.3s;
+    }
+  }
+}

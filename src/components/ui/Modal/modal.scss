@@ -1,0 +1,82 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+  position: fixed;
+  top: 15rem;
+  width: 100%;
+  z-index: 2000;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 1rem;
+  bottom: 0;
+
+  max-width: 110rem;
+  margin: 0 auto;
+
+  z-index: 3000;
+  animation: slide-down 300ms ease-out forwards;
+
+  @media screen and (max-width: 35.25em) {
+    right: 0;
+  }
+}
+
+.cart-modal {
+  display: flex;
+  justify-content: flex-end;
+  @media screen and (max-width: 35.25em) {
+    justify-content: center;
+  }
+}
+
+.mobile-menu-container {
+  top: 0;
+  height: 38rem;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  border-radius: 0 0 2rem 2rem;
+  animation: slide-down 400ms ease-out forwards;
+  @media screen and (max-width: 35.25em) {
+    height: 75rem;
+  }
+}
+
+.succes-mesg-container {
+  top: 11rem;
+}
+
+.mobile-menu-modal {
+  top: -1rem;
+
+  @media screen and (max-width: 35.25em) {
+    top: 6rem;
+  }
+}
+
+.success-modal {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-50rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

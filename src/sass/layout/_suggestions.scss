@@ -1,0 +1,11 @@
+.suggestions {
+  @include gridCellSetings;
+
+  color: black;
+  grid-column: 2/-1;
+  grid-row: 2/-1;
+  background-color: $color-background-body;
+  padding-bottom: 3rem;
+
+  // background-color: rgba(255, 0, 0, 0.528);
+}

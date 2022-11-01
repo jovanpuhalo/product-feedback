@@ -1,0 +1,74 @@
+.ui-button {
+  width: 16rem;
+  height: 4.8rem;
+  color: white;
+  background-color: $color-primary-button;
+  border-radius: 1rem;
+  border: none;
+  font-size: 1.4rem;
+  // letter-spacing: 1px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $color-primary-button-light;
+    translate: 0 -2px;
+  }
+  &--edit {
+    background-color: $color-primary-button-text;
+    &:hover {
+      background-color: rgba($color-primary-button-text, 0.5);
+      // translate: 0 -2px;
+      // color: $color-white;
+    }
+  }
+  &--delete {
+    background-color: $color-primary-header;
+    &:hover {
+      background-color: rgba($color-primary-header, 0.5);
+      // translate: 0 -2px;
+      // color: $color-white;
+    }
+  }
+  &--login {
+    height: 3.6rem;
+  }
+  &--filter {
+    width: auto;
+    height: auto;
+    color: $color-primary-button-text;
+    background-color: $color-primary-grey;
+    padding: 0rem 2rem;
+    letter-spacing: normal;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    &.active {
+      background-color: $color-primary-button-text;
+      color: $color-white;
+      box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-primary-button-text;
+    }
+
+    &:hover {
+      background-color: $color-primary-button-hover;
+      translate: 0 -2px;
+      // color: $color-white;
+    }
+    &:active {
+      background-color: $color-primary-button-text;
+      translate: 0 2px;
+    }
+  }
+  &--cancel {
+    width: auto;
+    padding: 1rem 2rem;
+    background-color: $color-primary-button-cancel;
+    &:hover {
+      background-color: rgba($color-primary-button-cancel, 0.7);
+      translate: 0 -2px;
+      // color: $color-white;
+    }
+  }
+}

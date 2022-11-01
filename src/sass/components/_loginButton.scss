@@ -1,0 +1,9 @@
+.login {
+  justify-self: stretch;
+  background-color: $color-white;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: feedbackBoard-start/feedbackBoard-end;
+}

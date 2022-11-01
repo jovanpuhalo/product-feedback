@@ -1,0 +1,9 @@
+.feedback-filter {
+  @include gridCellSetings;
+
+  grid-row: feedbackFlter-start/roadmap-start;
+  padding: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+}
