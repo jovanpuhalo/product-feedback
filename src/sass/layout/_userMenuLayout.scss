@@ -6,8 +6,12 @@
   padding-right: 2rem;
   cursor: pointer;
   z-index: 12;
-
   position: relative;
+
+  @include respond(breakpoint2) {
+    cursor: default;
+    flex-direction: column;
+  }
 }
 
 .spinner-layout {

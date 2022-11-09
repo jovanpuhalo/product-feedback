@@ -47,14 +47,24 @@
       font-size: 1.5rem;
       color: $color-primary-button-text;
       font-weight: 800;
+      // &:active {
+      //   background-color: rgb(255, 255, 255);
+      // }
+      // &:focus {
+      //   background-color: rgb(255, 255, 255);
+      // }
       & :first-child {
         cursor: pointer;
       }
       &__edit-delete {
         color: $color-prymary-text;
         cursor: pointer;
-        & :first-child:hover {
+
+        & :first-child {
           color: rgba(205, 6, 6, 0.677);
+          &:hover {
+            color: rgba(205, 6, 6, 0.5);
+          }
         }
         & :last-child:hover {
           color: rgba(51, 50, 50, 0.508);
@@ -69,5 +79,9 @@
     color: $color-prymary-text;
     font-size: 1.5rem;
     word-wrap: break-word;
+
+    @include respond(breakpoint2) {
+      margin-left: 0;
+    }
   }
 }

@@ -10,10 +10,11 @@ const Suggestions = () => {
   const filteredSuggestions = useSelector((state) => state.suggestionsReducer.filteredSuggestions);
   const feedbackIsFetching = useSelector((state) => state.suggestionsReducer.feedbackIsFetching);
   const loading = useSelector((state) => state.suggestionsReducer.loading);
-
-  const suggestions = filteredSuggestions.map((item, index) => {
-    return <Feedback key={index} item={item} clickable />;
-  });
+  const suggestions = filteredSuggestions
+    .filter((item) => {
+      return item.status === "suggestion";
+    })
+    .map((item, index) => <Feedback key={index} item={item} clickable />);
 
   return (
     <div

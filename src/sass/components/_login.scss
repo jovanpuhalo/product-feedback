@@ -5,6 +5,8 @@
   background-color: $color-white;
   border-radius: 1rem;
   overflow: hidden;
+  margin: 2rem;
+  min-width: 30rem;
 
   &::before {
     position: absolute;

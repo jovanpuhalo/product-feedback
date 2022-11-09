@@ -1,10 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-// import "./modal.scss";
-
 const Backdrop = (props) => {
-  return <div className="backdrop" onClick={(e) => props.onClose(e)}></div>;
+  return <div className="backdrop" onClick={props.onClose}></div>;
 };
 const ModalOverlay = (props) => {
   useEffect(() => {
@@ -25,11 +23,13 @@ const portalElement = document.getElementById("overlays");
 const Modal = (props) => {
   return (
     <Fragment>
-      <Backdrop onClose={props.onClose} />
-
-      <ModalOverlay className={props.className} classContainer={props.classContainer}>
-        {props.children}
-      </ModalOverlay>
+      {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
+      {ReactDOM.createPortal(
+        <ModalOverlay className={props.className} classContainer={props.classContainer}>
+          {props.children}
+        </ModalOverlay>,
+        portalElement
+      )}
     </Fragment>
   );
 };

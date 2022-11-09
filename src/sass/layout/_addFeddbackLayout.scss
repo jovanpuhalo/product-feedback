@@ -4,4 +4,8 @@
   // background-color: white;
   margin: 0 auto;
   margin-top: 8rem;
+  padding-bottom: 4rem;
+  @include respond(breakpoint2) {
+    width: 90%;
+  }
 }

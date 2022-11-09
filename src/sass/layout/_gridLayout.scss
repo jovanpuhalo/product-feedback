@@ -1,11 +1,21 @@
 .grid-layout {
   margin: 10rem auto;
   padding: 0 2rem;
-  max-width: 110rem;
+  max-width: 120rem;
   display: grid;
-  gap: 3rem;
-  grid-template-columns: [feedbackBoard-start]30rem [feedbackBoard-end suggestion-start] 1fr [suggestion-end];
+  grid-template-columns: [feedbackBoard-start] minmax(26rem, 30rem) [feedbackBoard-end suggestion-start] minmax(
+      min-content,
+      83rem
+    ) [suggestion-end];
   grid-template-rows:
     [login-start] 7.4rem [feedbackBoard-start] 6.4rem 6.4rem[feedbackFlter-start]7.4rem 7.4rem[roadmap-start] 7.4rem[roadmap-start]
     7.4rem;
+  gap: 3rem;
+  @include respond(breakpoint2) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, min-content);
+    padding: 0;
+    margin: 0;
+    gap: 0;
+  }
 }

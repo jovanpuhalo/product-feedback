@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { login } from "../../store/auth-slice-actions/auth-actions";
+import { uiActions } from "../../store/ui-slice/ui-slice";
 
 const override = {
   translate: "0 -8px",
@@ -18,8 +19,10 @@ const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
+
   const logInHandler = () => {
     dispatch(login(emailRef.current.value, passwordRef.current.value));
+    dispatch(uiActions.setMenuIsOpen(false));
   };
 
   useEffect(() => {

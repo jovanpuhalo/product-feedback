@@ -2,6 +2,11 @@
   padding-left: 7.5rem;
   height: 0;
   overflow: hidden;
+
+  @include respond(breakpoint2) {
+    padding-left: 0;
+  }
+
   &:last-child {
     font-size: 1.3rem;
     color: $color-prymary-text;

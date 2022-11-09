@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { sortData } from "../../helper/sortData";
 
+import { toast } from "react-toastify";
+import { options } from "../../helper/ToastifyOptions";
+
 const suggestionsSlice = createSlice({
   name: "suggestioSlice",
   initialState: {
@@ -20,32 +23,63 @@ const suggestionsSlice = createSlice({
       const sortedData = sortData(action.payload, "asc", "createdAt");
       state.suggestions = [...sortedData];
       state.filteredSuggestions = [...sortedData];
-      // console.log("initialni", state.suggestions);
     },
 
     addFeedback(state, action) {
       state.filter = "All";
       state.suggestions = [action.payload, ...state.suggestions];
       state.filteredSuggestions = [...state.suggestions];
+      toast.success(`Feedback is created.`, { ...options });
     },
     deleteFeedback(state, action) {
       state.suggestions = [...state.suggestions.filter((item) => item.id !== action.payload)];
       state.filteredSuggestions = [...state.suggestions];
+      toast.success(`Feedback is deleted.`, { ...options });
     },
 
     updateFeedback(state, action) {
-      const feedback = { ...action.payload };
+      const feedback = { ...action.payload.data };
       state.suggestions = [...state.suggestions.filter((item) => item.id !== feedback.id), feedback];
       const sortedData = sortData(state.suggestions, "asc", "createdAt");
       state.suggestions = [...sortedData];
       state.filteredSuggestions = [...state.suggestions];
+
+      if (action.payload.message === "voted") {
+        toast.success(`You voted successfully.`, { ...options });
+      } else {
+        toast.success(`Feedback is edited.`, { ...options });
+      }
     },
 
     updateFeedbackComments(state, action) {
-      state.suggestions = [...state.suggestions.filter((item) => item.id !== action.payload.id), action.payload];
+      state.suggestions = [
+        ...state.suggestions.filter((item) => item.id !== action.payload.openedFeedback.id),
+        action.payload.openedFeedback,
+      ];
       const sortedData = sortData(state.suggestions, "asc", "createdAt");
       state.suggestions = [...sortedData];
       state.filteredSuggestions = [...state.suggestions];
+
+      switch (action.payload.method) {
+        case "add":
+          toast.success(`Comment is added.`, { ...options });
+          break;
+        case "remove":
+          toast.success(`Comment is deleted.`, { ...options });
+          break;
+        case "update":
+          toast.success(`Comment is updated.`, { ...options });
+          break;
+        case "add reply":
+          toast.success(`Reply is added.`, { ...options });
+          break;
+        case "delete reply":
+          toast.success(`Reply is deleted.`, { ...options });
+          break;
+
+        default:
+          break;
+      }
     },
 
     setFilter(state, action) {
@@ -113,9 +147,9 @@ const suggestionsSlice = createSlice({
     setOpenedFeedback(state, action) {
       state.openedFeedback = action.payload;
     },
-    setNumberOfFilteredSuggestions(state, action) {
-      state.numberOfilteredSuggestions = action.payload;
-    },
+    // setNumberOfFilteredSuggestions(state, action) {
+    //   state.numberOfilteredSuggestions = action.payload;
+    // },
   },
 });
 export const suggestionActions = suggestionsSlice.actions;

@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../ui/Buttons/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { suggestionActions } from "../../store/suggestions-slice-actions/suggestion-slice";
+import { uiActions } from "../../store/ui-slice/ui-slice";
 
 const FeedbackFilter = () => {
   const dispatch = useDispatch();
   const activeButton = useSelector((state) => state.suggestionsReducer.filter);
 
-  // const [activeButton, setActiveButton] = useState("All");
-
   const onClickHandler = (buttonName) => {
-    // setActiveButton(buttonName);
     dispatch(suggestionActions.setFilter(buttonName));
+    dispatch(uiActions.setMenuIsOpen(false));
   };
   return (
     <div className="feedback-filter">

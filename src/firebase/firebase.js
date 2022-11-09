@@ -3,10 +3,9 @@ import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
-  getDocs,
+  // getDocs,
   addDoc,
   serverTimestamp,
-  onSnapshot,
   setDoc,
   getDoc,
   doc,
@@ -14,6 +13,8 @@ import {
   arrayUnion,
   arrayRemove,
   deleteDoc,
+  increment,
+  onSnapshot,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -28,85 +29,84 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const colSuggestionsRef = collection(db, "suggestions");
-const colUsersRef = collection(db, "users");
+// const colInitRef = collection(db, "init");
 
 const auth = getAuth();
 const user = auth.currentUser;
 
-export const getSuggestions = () => {
-  const suggestionsData = getDocs(colSuggestionsRef)
-    .then((snapshot) => {
-      let suggestions = [];
-      snapshot.docs.forEach((doc) => {
-        const date = doc.data().createdAt.toDate().toString();
-        suggestions.push({ ...doc.data(), id: doc.id, createdAt: date });
-      });
-      return suggestions;
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-
-  return suggestionsData;
-};
-
-// export const getSuggestions = (dispatch) =>
+// export const getSuggestions = async () => {
+//   let suggestions = [];
 //   onSnapshot(colSuggestionsRef, (snapshot) => {
-//     console.log("desila se promena");
-//     let suggestions = [];
 //     snapshot.docs.forEach((doc) => {
-//       if (doc.data()) {
-//         const date = doc.data().createdAt.toDate().toString();
-//         suggestions.push({ ...doc.data(), id: doc.id, createdAt: date });
-//       }
+//       const date = doc.data().createdAt.toDate().toString();
+//       suggestions.push({ ...doc.data(), id: doc.id, createdAt: date });
 //     });
-
-//     dispatch(suggestions);
+//     console.log("ssssssssssssssssssss", suggestions);
+//     return suggestions;
 //   });
 
-export const getUsers = () => {
-  const usersData = getDocs(colUsersRef)
-    .then((snapshot) => {
-      let users = [];
-      snapshot.docs.forEach((doc) => {
-        if (doc.data()) {
-          const date = doc.data().createdAt.toDate().toString();
-          users.push({ ...doc.data(), id: doc.id, createdAt: date });
-        }
-      });
-      return users;
-    })
-    .catch((err) => {
-      console.log(err.message);
+//   // const suggestionsData = getDocs(colSuggestionsRef)
+//   //   .then((snapshot) => {
+//   //     let suggestions = [];
+//   //     snapshot.docs.forEach((doc) => {
+//   //       const date = doc.data().createdAt.toDate().toString();
+//   //       suggestions.push({ ...doc.data(), id: doc.id, createdAt: date });
+//   //     });
+//   //     return suggestions;
+//   //   })
+//   //   .catch((err) => {});
+
+//   // return suggestionsData;
+// };
+
+export const getSuggestions = (dispatch) =>
+  onSnapshot(colSuggestionsRef, (snapshot) => {
+    let suggestions = [];
+    snapshot.docs.forEach((doc) => {
+      if (doc.data().createdAt) {
+        const date = doc.data().createdAt.toDate().toString();
+        suggestions.push({ ...doc.data(), id: doc.id, createdAt: date });
+      }
     });
-  return usersData;
+    console.log("ffffffffffffffffffffffffffffffff", suggestions);
+    dispatch(suggestions);
+  });
+
+export const getInitDeleteId = async () => {
+  const initDeleteData = await getDoc(doc(db, "init", "start state"));
+  console.log("initData", initDeleteData.data());
+  initDeleteData.data().feedbacks.map((id) => deleteFeedback(id));
+  // initDeleteData.data().users.map((id) => deleteFeedback(id));
 };
 
 export const getUser = async (userId) => {
   try {
     const userData = await getDoc(doc(db, "users", userId));
-    // console.log("user", userId, userData, userData.data());
+    // console.log("Stampam sve zivo i nezivo", userData);
+    // console.log("userData.data()", userData.data());
+    // console.log("userData.data().createdAt", userData.data().createdAt);
+    // console.log("userData.data().createdAt.toDate()", userData.data().createdAt.toDate());
     const date = userData.data().createdAt.toDate().toString();
 
     if (userData.exists()) {
       return { ...userData.data(), createdAt: date };
     }
   } catch (error) {
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 };
 export const addUser = async (data, userId) => {
-  // const userData = addDoc(colUsersRef, {
-  //   createdAt: serverTimestamp(),
-  //   ...data,
-  // });
-
   try {
     await setDoc(doc(db, "users", userId), { createdAt: serverTimestamp(), ...data });
     //setDoc ne vraca nista posle uspjesnog upisivanja dokumenta
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+export const addUserInit = async (id) => {
+  const docRef = doc(db, "init", "start state");
+  await updateDoc(docRef, { users: arrayUnion(id) });
 };
 
 export const updateUser = async (userId, data) => {
@@ -123,18 +123,29 @@ export const addFeedback = (data) => {
     createdAt: serverTimestamp(),
     ...data,
   });
+  // console.log(data);
+  // const docRef = doc(db, "init", "start state");
+  // updateDoc(docRef, { "feedbacks": arrayUnion(data.id) });
   return suggestionData;
+};
+
+export const addFeedbackInit = async (id) => {
+  const docRef = doc(db, "init", "start state");
+  await updateDoc(docRef, { feedbacks: arrayUnion(id) });
 };
 
 export const deleteFeedback = async (id) => {
   const docRef = doc(db, "suggestions", id);
   await deleteDoc(docRef);
+
+  await updateDoc(doc(db, "init", "start state"), {
+    feedbacks: arrayRemove(id),
+  });
 };
 
 export const getFeedback = async (feedbackId) => {
   try {
     const feedbackData = await getDoc(doc(db, "suggestions", feedbackId));
-    console.log("STAMPAM STA JE STIGLO IZ FIREBASE feedbackData.data()", feedbackData);
     const date = feedbackData.data().createdAt.toDate().toString();
     if (feedbackData.exists()) {
       return { ...feedbackData.data(), createdAt: date, id: feedbackData.id };
@@ -168,6 +179,15 @@ export const updateFeedback = async (id, data) => {
   await updateDoc(docRef, data);
 };
 
+export const updateFeedbackVote = async (method, id) => {
+  const docRef = doc(db, "suggestions", id);
+  if (method === "increment") {
+    await updateDoc(docRef, { upVotes: increment(1) });
+  } else {
+    await updateDoc(docRef, { upVotes: increment(-1) });
+  }
+};
+
 export const updateComment = async (data) => {
   const docRef = doc(db, "suggestions", data.feedbackId);
   try {
@@ -190,9 +210,11 @@ export const signIn = async (email, password) => {
 };
 
 export const currentSignInUser = (dispatch) => {
-  onAuthStateChanged(getAuth(), (user) => {
+  onAuthStateChanged(getAuth(), async (user) => {
     if (user) {
       dispatch(user);
+    } else {
+      await getInitDeleteId();
     }
   });
 };

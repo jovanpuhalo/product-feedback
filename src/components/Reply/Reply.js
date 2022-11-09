@@ -37,11 +37,10 @@ const Reply = ({ reply, comment, scroll }) => {
     openedFeedback = { ...openedFeedback, comments };
 
     const data = {
-      method: "update",
+      method: "delete reply",
       feedbackId: openedFeedback.id,
       commentData: comments,
     };
-    console.log("openedFeedback", openedFeedback);
     dispatch(fetchUpdateFeedbackComments(data, openedFeedback));
   };
 
@@ -62,7 +61,7 @@ const Reply = ({ reply, comment, scroll }) => {
     openedFeedback = { ...openedFeedback, comments: [...comments] };
 
     const data = {
-      method: "update",
+      method: "add reply",
       feedbackId: openedFeedback.id,
       commentData: comments,
     };
@@ -87,7 +86,6 @@ const Reply = ({ reply, comment, scroll }) => {
           ) : (
             <div className="reply__header__reply__edit-delete">
               <div onClick={onDeleteHandler}>Delete</div>
-              <div>Edit</div>
             </div>
           )}
         </div>

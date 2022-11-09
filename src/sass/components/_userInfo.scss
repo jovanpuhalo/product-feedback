@@ -4,8 +4,15 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 0 1rem;
   padding: 0 2rem;
+  @include respond(breakpoint2) {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    padding: 0;
+    cursor: default;
+  }
 
   &__photo {
+    position: relative;
     width: 5rem;
     height: 5rem;
     grid-column: 1/2;
@@ -45,6 +52,10 @@
   // @media screen and (min-width: 50em) {
   //   display: none;
   // }
+
+  @include respond(breakpoint2) {
+    display: none;
+  }
 
   & > div {
     width: 100%;

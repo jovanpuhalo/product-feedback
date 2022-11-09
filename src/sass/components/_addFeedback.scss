@@ -6,6 +6,11 @@
   padding: 3rem;
   padding-top: 6rem;
 
+  @include respond(breakpoint2) {
+    margin: 1rem;
+    padding-top: 2rem;
+  }
+
   //   animation: moveUp 0.5s ease-in forwards;
   & h2 {
     font-size: 2.2rem;
@@ -15,7 +20,18 @@
   &__icon {
     position: absolute;
     top: -2rem;
-    // translate: 0 calc(-40% - 3rem);
+    @include respond(breakpoint2) {
+      top: -4rem;
+    }
+  }
+  &__icon2 {
+    position: absolute;
+    top: -2rem;
+    left: 5rem;
+    transform: scale(1.5);
+    @include respond(breakpoint2) {
+      top: -3rem;
+    }
   }
 
   &__controls {

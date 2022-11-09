@@ -4,13 +4,13 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState: {
     userIsUpdating: false,
-    users: [],
+    // users: [],
     user: {},
   },
   reducers: {
-    setUsers(state, action) {
-      state.users = [...action.payload];
-    },
+    // setUsers(state, action) {
+    //   state.users = [...action.payload];
+    // },
     setUser(state, action) {
       console.log("Stigao user", action.payload);
       state.user = action.payload;

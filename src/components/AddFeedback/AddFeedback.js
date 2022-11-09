@@ -10,13 +10,14 @@ import { fetchAddFeedback } from "../../store/suggestions-slice-actions/suggesti
 
 const AddFeedback = () => {
   const currentUser = useSelector((state) => state.authReducer.currentUser);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const navigate = useNavigate();
-  const dispach = useDispatch();
+  const dispatch = useDispatch();
 
   const categoryRef = useRef();
 
@@ -30,9 +31,10 @@ const AddFeedback = () => {
       category: categoryRef.current.props.value.value,
       upVotes: 0,
       comments: [],
+      status: "suggestion",
       userId: currentUser.userId,
     };
-    dispach(fetchAddFeedback(feedbackData));
+    dispatch(fetchAddFeedback(feedbackData));
     navigate("/", { replace: true });
   };
 
@@ -40,15 +42,16 @@ const AddFeedback = () => {
     <Fragment>
       <div className="add-feedback">
         <h2>Create New Feedback</h2>
-        <img src="./assets/shared/icon-new-feedback.svg" alt="" className="add-feedback__icon" />
+        <img src="assets/shared/icon-new-feedback.svg" alt="" className="add-feedback__icon" />
         <div className={`add-feedback__controls ${errors.title?.message && "error"}`}>
           <p data-title>Feedback Title</p>
           <p data-dscription>Add a short, descriptive headline</p>
           <input
             type="text"
+            maxLength="45"
             {...register("title", {
               required: { message: "Title is required!", value: true },
-              maxLength: { message: "Max length is 60!", value: 60 },
+              maxLength: { message: "Max length is 45!", value: 45 },
             })}
           />
           {errors.title && <p className="error-message">{errors.title?.message}</p>}
@@ -61,6 +64,7 @@ const AddFeedback = () => {
             options={optionsAddFeedback}
             defaultValue={optionsAddFeedback[0]}
             placeholder="Feature"
+            isSearchable={false}
             styles={customStyles}
             ref={categoryRef}
           />

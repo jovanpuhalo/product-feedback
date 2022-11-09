@@ -1,16 +1,5 @@
-Svaki feedback ima sliku svog usera koji ga je postavio . 
-POKUSATI NAPRAVITI
 
-Sliku usera pribaviti tako sto ces uzeti userId iz feedbacka(svaki Feedback ima userID koji ga je postavio)
-i poslati upit bazi sa usera sa ti id-ijem i uzeti sliku od usera.
-
-2. ne radi bas najbolje userlogin. kada pocnem pisati email i kada tabom prebacim na password email plje se zezne
-
-3. votes--u firebase napraviti increment decerement
-
-4. srediti slike, comentare,
-5. viidtii sta s emoze napraviti univerzalno, funkcije, comment componenta
-5. prebaciti activnosti iz komponente u slice, redux
 6. previse loadinga--mozda moze neki stejt loading lokalno da se odradi
 7.suggestions srediti
 8. login error hendlvati
+9. loading za edit data

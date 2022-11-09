@@ -1,4 +1,13 @@
-import { addUser, getUser, signIn, signUp, signOutUser, currentSignInUser } from "../../firebase/firebase";
+import {
+  addUser,
+  getUser,
+  signIn,
+  signUp,
+  signOutUser,
+  currentSignInUser,
+  addUserInit,
+  getInitDeleteId,
+} from "../../firebase/firebase";
 import { authActions } from "./auth-slice";
 
 export const createUser = (data) => {
@@ -6,17 +15,21 @@ export const createUser = (data) => {
     dispatch(authActions.setIsLoading(true));
     try {
       const res = await signUp(data.email, data.password);
-      if (res)
+      if (res) {
         await addUser(
           {
             name: data.fullname,
             image: data.image,
+            status: "user",
             email: data.email,
             username: data.username,
             upVotedSugestions: data.upVotedSugestions,
           },
           res.user.uid
         );
+        // await signOutUser();
+        await addUserInit(res.user.uid); //dodavanje id-ija u initijalni dokument u firestore(zbog resetovanja podataka)
+      }
       dispatch(authActions.createUser());
       //   dispatch(
       //     authActions.createUser({
@@ -39,6 +52,7 @@ export const login = (email, password) => {
     dispatch(authActions.setIsLoading(true));
     try {
       const res = await signIn(email, password);
+      await getInitDeleteId();
       if (res) {
         const user = await getUser(res.uid);
         const data = {
@@ -47,17 +61,22 @@ export const login = (email, password) => {
           ...user,
         };
         dispatch(authActions.userLogin(data));
+        dispatch(authActions.setIsLoading(false));
       }
     } catch (error) {
       console.log(error.message);
+      dispatch(authActions.setIsLoading(false));
+
       //   dispatch(authActions.setError(error.message));
     }
   };
 };
 export const getCurrentSignInUser = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     currentSignInUser(async (currentUser) => {
       const user = await getUser(currentUser.uid);
+      // dispatch(fetchSuggestions());
+
       const data = {
         token: currentUser.accessToken,
         userId: currentUser.uid,

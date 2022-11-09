@@ -1,6 +1,6 @@
 .feedback {
   width: 100%;
-  max-width: 73rem;
+  // max-width: 73rem;
   // height: 21rem;
   // max-height: 28rem;
   background-color: $color-white;
@@ -11,21 +11,32 @@
   display: grid;
   grid-template-columns: 4rem 1fr 6rem;
   grid-template-rows: 5.5rem 1fr 4rem;
-  word-wrap: break-word;
   // transition: all 0.5s ease;
 
   // animation: moveUp 0.5s ease forwards;
 
+  @include respond(breakpoint2) {
+    padding: 2rem;
+  }
+
   &__clickable {
     cursor: pointer;
   }
+
   &__feedback {
     grid-column: 2/3;
     grid-row: 2/3;
     padding: 0 2rem;
+    word-break: break-word;
+
+    @include respond(breakpoint2) {
+      grid-column: 1/-1;
+      grid-row: 2/3;
+      padding: 0;
+    }
     &__title {
-      max-width: 50rem;
-      word-wrap: break-word;
+      // max-width: 50rem;
+      word-break: break-word;
       color: $color-primary-header;
       font-size: 2rem;
       font-weight: 700;
@@ -34,9 +45,13 @@
       color: $color-prymary-text;
       font-size: 1.5rem;
       font-weight: 400;
-      width: 51rem;
-      word-wrap: break-word;
-      // white-space: nowrap;
+      // width: 51rem;
+      word-break: break-word; // white-space: nowrap;
+      &__more {
+        color: blue;
+        cursor: pointer;
+        font-weight: 600;
+      }
     }
   }
   &__category {
@@ -53,6 +68,10 @@
     text-transform: capitalize;
     font-size: 1.3rem;
     font-weight: 600;
+    @include respond(breakpoint2) {
+      grid-column: 1/-1;
+      grid-row: 3/4;
+    }
   }
 
   &__comments {
@@ -67,6 +86,15 @@
     align-items: center;
     gap: 0.5rem;
 
+    @include respond(breakpoint2) {
+      grid-column: 3/4;
+      grid-row: 4/5;
+    }
+
+    &--full {
+      place-self: unset;
+    }
+
     & img {
       width: fit-content;
       height: fit-content;
@@ -78,4 +106,9 @@
       color: $color-primary-header;
     }
   }
+}
+
+.feedback__roadmap {
+  grid-template-columns: 35rem;
+  grid-template-rows: repeat(4, min-content);
 }

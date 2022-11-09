@@ -1,0 +1,21 @@
+[debug] [2022-11-09T09:11:59.858Z] ----------------------------------------------------------------------
+[debug] [2022-11-09T09:11:59.859Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-11-09T09:11:59.860Z] CLI Version:   11.16.0
+[debug] [2022-11-09T09:11:59.860Z] Platform:      win32
+[debug] [2022-11-09T09:11:59.860Z] Node Version:  v16.16.0
+[debug] [2022-11-09T09:11:59.860Z] Time:          Wed Nov 09 2022 10:11:59 GMT+0100 (Central European Standard Time)
+[debug] [2022-11-09T09:11:59.861Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-09T09:11:59.866Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-09T09:11:59.867Z] > authorizing via signed-in user (jovan.puhalo86@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Korisnik\Desktop\product-feedback-app
+

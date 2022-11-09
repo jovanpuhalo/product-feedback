@@ -8,9 +8,12 @@
   font-size: 1.4rem;
   // letter-spacing: 1px;
   font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.3s;
+  box-shadow: 0px 1px 3px 0px #00000037;
+
+  @include respond(breakpoint2) {
+    width: 13rem;
+    height: 3.5rem;
+  }
 
   &:hover {
     background-color: $color-primary-button-light;
@@ -34,6 +37,7 @@
   }
   &--login {
     height: 3.6rem;
+    cursor: pointer;
   }
   &--filter {
     width: auto;
@@ -44,6 +48,10 @@
     letter-spacing: normal;
     font-size: 1.2rem;
     font-weight: 600;
+    cursor: pointer;
+    @include respond(breakpoint2) {
+      padding: 1rem 2rem;
+    }
 
     &.active {
       background-color: $color-primary-button-text;
@@ -69,6 +77,24 @@
       background-color: rgba($color-primary-button-cancel, 0.7);
       translate: 0 -2px;
       // color: $color-white;
+    }
+  }
+
+  &--login-mobile,
+  &--register-mobile {
+    width: 10rem;
+    padding: 1rem;
+    background-color: rgb(25, 118, 210);
+    font-size: 1.1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(rgb(25, 118, 210), 0.7);
+    }
+  }
+  &--register-mobile {
+    background-color: rgb(163, 21, 69);
+    &:hover {
+      background-color: rgba(rgb(163, 21, 69), 0.7);
     }
   }
 }

@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../ui/Buttons/Button";
 
 const ReplyForm = (props) => {
   const [comment, setComment] = useState("");
 
   const postReplyHandler = () => {
-    console.log("postjem reply");
-    props.postReplyHandler(comment);
+    if (props.commentIfEdit) {
+      props.editReply(comment);
+    } else {
+      props.postReplyHandler(comment);
+    }
 
     setTimeout(() => {
       setComment("");
     }, 300);
   };
+
   const textCountHandler = (e) => {
     setComment(e.target.value);
   };
+
+  useEffect(() => {
+    if (props.commentIfEdit) setComment(props.commentIfEdit);
+  }, [props.commentIfEdit]);
 
   return (
     <div className={`reply-form ${props.className}`}>
@@ -29,10 +37,10 @@ const ReplyForm = (props) => {
         ></textarea>
 
         <Button style={{ width: "10rem", height: "3.5rem", fontSize: "1.3rem" }} onClick={postReplyHandler}>
-          Post reply
+          {props.commentIfEdit ? "Edit" : "Post reply"}
         </Button>
       </div>
-      <div> {250 - comment.length} characters left</div>
+      <div> {250 - comment?.length} characters left</div>
     </div>
   );
 };

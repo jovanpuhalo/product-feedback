@@ -15,6 +15,7 @@ import {
 } from "../../store/suggestions-slice-actions/suggestio-actions";
 import Comment from "../Comment/Comment";
 import CommentsLayout from "../layouts/CommentsLayout/CommentsLayout";
+import { uiActions } from "../../store/ui-slice/ui-slice";
 
 const override = {
   translate: "0 -8px",
@@ -25,6 +26,8 @@ const FeedbackDetail = () => {
   const feedbackIsUpdating = useSelector((state) => state.suggestionsReducer.feedbackIsUpdating);
   const feedbackIsDeleting = useSelector((state) => state.suggestionsReducer.feedbackIsDeleting);
   const currentUser = useSelector((state) => state.authReducer.currentUser);
+  const isUserLoggedIn = useSelector((state) => state.authReducer.isUserLoggedIn);
+
   let openedFeedback = useSelector((state) => state.suggestionsReducer.openedFeedback);
 
   const [comment, setComment] = useState("");
@@ -45,6 +48,12 @@ const FeedbackDetail = () => {
   }, [dispatch, navigate, openedFeedback, feedbackIsUpdating, feedbackIsDeleting]);
 
   const postCommentHandler = () => {
+    if (!isUserLoggedIn) {
+      dispatch(uiActions.setModalIsOpen(true));
+      dispatch(uiActions.setModalMessage("You are not logged in."));
+      return;
+    }
+
     if (comment.length === 0) return;
 
     const data = {
@@ -56,23 +65,20 @@ const FeedbackDetail = () => {
     dispatch(fetchUpdateFeedbackComments(data, openedFeedback));
   };
 
-  const onDeleteHandler = (id) => {
+  const onDeleteHandler = () => {
     dispatch(fetchDeleteFeedback(openedFeedback.id));
-
-    // setTimeout(() => {
-    //   if (!feedbackIsDeleting) {
-    //     navigate("/", { replace: true });
-    //   }
-    // });
   };
 
+  const onEditHandler = () => {
+    navigate(`/feedback/${openedFeedback.id}/edit`, { replace: true });
+  };
   return (
     <Fragment>
       {!feedbackIsFetching ? (
         <div className="feedback-detail-layout">
           <div className="feedback-detail__header">
             <GoBack />
-            {currentUser.userId === openedFeedback.userId ? (
+            {currentUser.userId === openedFeedback.userId || currentUser.status === "administrator" ? (
               <>
                 <Button
                   className="delete"
@@ -86,7 +92,9 @@ const FeedbackDetail = () => {
                   )}
                 </Button>
 
-                <Button className="edit">Edit Feedback</Button>
+                <Button className="edit" onClick={onEditHandler}>
+                  Edit Feedback
+                </Button>
               </>
             ) : null}
           </div>

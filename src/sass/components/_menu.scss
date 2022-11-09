@@ -1,0 +1,44 @@
+.backdrop-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.358);
+  display: none;
+  z-index: 80;
+  &__show {
+    display: block;
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 8.1rem;
+  right: 0;
+  width: 28rem;
+  height: 100vh;
+  background-color: $color-white;
+  //   z-index: 10;
+  color: black;
+  translate: 60rem;
+  transition: all 0.3s ease-out;
+  display: none;
+  z-index: 100;
+
+  @include respond(breakpoint2) {
+    display: block;
+  }
+  &__user {
+    padding: 2rem;
+  }
+
+  &__button-box {
+    padding-top: 3rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+.menu-show {
+  translate: 0;
+}

@@ -5,6 +5,12 @@ export const optionsAddFeedback = [
   { value: "Enhancement", label: "Enhancement" },
   { value: "Bug", label: "Bug" },
 ];
+export const optionsStatusFeedback = [
+  { value: "suggestion", label: "Suggestion" },
+  { value: "Planned", label: "Planned" },
+  { value: "In-progress", label: "In-progress" },
+  { value: "Live", label: "Live" },
+];
 
 export const optionsSort = [
   { value: "CreatedAt", label: "CreatedAt" },
@@ -30,8 +36,13 @@ export const customStyles = {
     translate: "0 -12px",
   }),
   dropdownIndicator: (provided, state) => ({
+    ...provided,
+    ":hover": { color: "rgb(70, 97, 230)" },
     color: "rgb(70, 97, 230)",
+    transition: "all .2s ease",
+    transform: state.selectProps.menuIsOpen && "rotate(180deg)",
   }),
+
   indicatorSeparator: (provided, state) => ({
     //ovim sto je prazno znacid a ponistava podesavanja, jer nismo stavili ...provided
   }),
@@ -136,11 +147,4 @@ export const sortStyles = {
       ":active": { backgroundColor: "rgb(239, 240, 248)" },
     };
   },
-  dropdownIndicator: (provided, state) => ({
-    ...provided,
-    ":hover": { color: "rgb(70, 97, 230)" },
-    color: "rgb(70, 97, 230)",
-    transition: "all .2s ease",
-    transform: state.selectProps.menuIsOpen && "rotate(180deg)",
-  }),
 };

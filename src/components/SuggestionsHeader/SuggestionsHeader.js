@@ -7,20 +7,26 @@ import Select from "react-select";
 
 import { useNavigate } from "react-router";
 import Button from "../ui/Buttons/Button";
+import { uiActions } from "../../store/ui-slice/ui-slice";
 
 const SuggestionsHeader = () => {
-  console.log("render HEADER");
-  const filteredSuggestions = useSelector((state) => state.suggestionsReducer.filteredSuggestions);
+  const isUserLoggedIn = useSelector((state) => state.authReducer.isUserLoggedIn);
+  let filteredSuggestions = useSelector((state) => state.suggestionsReducer.filteredSuggestions);
 
+  filteredSuggestions = filteredSuggestions.filter((item) => item.status === "suggestion");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const sortRef = useRef();
 
   const onClickHandler = () => {
+    if (!isUserLoggedIn) {
+      dispatch(uiActions.setModalIsOpen(true));
+      dispatch(uiActions.setModalMessage("You are not logged in."));
+      return;
+    }
     navigate("/addFeedback");
   };
   const onChangeHandler = (data) => {
-    // console.log("ddddddddd", data.value);
     dispatch(suggestionActions.sortSuggestions(data.value));
   };
 
@@ -32,9 +38,9 @@ const SuggestionsHeader = () => {
       <Select
         options={optionsSort}
         defaultValue={optionsSort[0]}
-        placeholder="Feature"
         styles={sortStyles}
         ref={sortRef}
+        isSearchable={false}
         onChange={onChangeHandler}
       />
       <Button onClick={onClickHandler}>+ Add Fedback</Button>

@@ -9,3 +9,110 @@
     opacity: 1;
   }
 }
+
+///MOBILE BUTTON ANIMATION
+
+@keyframes rotateButtonClose {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: -90deg;
+  }
+}
+
+@keyframes rotateButtonOpen {
+  0% {
+    rotate: -90deg;
+  }
+
+  100% {
+    rotate: 0;
+  }
+}
+
+@keyframes opacityMiddleHide {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes opacityMiddleShow {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes topAnimationClose {
+  0% {
+    translate: 0;
+    rotate: 0deg;
+  }
+
+  50% {
+    rotate: 0deg;
+    translate: 0 12px;
+  }
+
+  100% {
+    rotate: -45deg;
+    translate: 0 12px;
+  }
+}
+
+@keyframes topAnimationOpen {
+  0% {
+    rotate: -45deg;
+    translate: 0 12px;
+  }
+
+  50% {
+    rotate: 0deg;
+    translate: 0 12px;
+  }
+
+  100% {
+    translate: 0;
+    rotate: 0deg;
+  }
+}
+@keyframes bottomAnimationClose {
+  0% {
+    translate: 0;
+    rotate: 0deg;
+  }
+
+  50% {
+    rotate: 0deg;
+    translate: 0 -12px;
+  }
+
+  100% {
+    rotate: 45deg;
+    translate: 0 -12px;
+  }
+}
+
+@keyframes bottomAnimationOpen {
+  0% {
+    rotate: 45deg;
+    translate: 0 -12px;
+  }
+
+  50% {
+    rotate: 0deg;
+    translate: 0 -12px;
+  }
+
+  100% {
+    translate: 0;
+    rotate: 0deg;
+  }
+}

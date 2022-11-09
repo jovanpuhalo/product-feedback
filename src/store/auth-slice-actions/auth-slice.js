@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { toast } from "react-toastify";
+import { options } from "../../helper/ToastifyOptions";
+
 const authSlice = createSlice({
   name: "authSlice",
   initialState: {
@@ -16,6 +19,7 @@ const authSlice = createSlice({
       state.error = "";
       state.isLoading = false;
       state.userIsCreated = true;
+      toast.success(`User is created.`, { ...options });
     },
 
     setError(state, action) {
@@ -39,6 +43,7 @@ const authSlice = createSlice({
       state.currentUser = {};
       state.isLoading = false;
       localStorage.removeItem("loggedUser");
+      toast.success(`You are successfully logged out.`, { ...options });
     },
     updateCurrentUser(state, action) {
       state.currentUser = {

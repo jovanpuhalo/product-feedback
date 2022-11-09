@@ -2,21 +2,39 @@
   grid-column: feedbackBoard-start/feedbackBoard-end;
   grid-row: feedbackBoard-start / feedbackFlter-start;
 
-  @include gridCellSetings;
+  // @include gridCellSetings;
+  color: $color-white;
+  border-radius: 1rem;
 
   padding: 5rem 3rem;
   background-image: url("../../assets/desktop/background-header.png");
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+
+  @include respond(breakpoint2) {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    border-radius: 0;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
 
   & h1 {
     font-size: 2rem;
+    translate: 0 2rem;
+    @include respond(breakpoint2) {
+      translate: 0;
+    }
   }
   & h4 {
     font-size: 1.5rem;
     color: $color-white-lite;
+    translate: 0 2rem;
+    @include respond(breakpoint2) {
+      translate: 0;
+    }
   }
 }

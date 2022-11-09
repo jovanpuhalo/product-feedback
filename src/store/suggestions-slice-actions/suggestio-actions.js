@@ -1,4 +1,4 @@
-import suggestionsSlice, { suggestionActions } from "./suggestion-slice";
+import { suggestionActions } from "./suggestion-slice";
 import {
   getSuggestions,
   addFeedback,
@@ -8,25 +8,32 @@ import {
   removeComment,
   updateComment,
   deleteFeedback,
+  updateFeedbackVote,
+  addFeedbackInit,
+  getInitDeleteId,
 } from "../../firebase/firebase";
 
-// export const fetchSuggestions = () => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await getSuggestions();
-//       dispatch(suggestionActions.initSuggestions(res));
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+export const initDelete = async () => {
+  try {
+    // dispatch(suggestionActions.setFeedbackIsFetching(true));
+    await getInitDeleteId();
+    // dispatch(suggestionActions.initSuggestions(res));
+    // dispatch(suggestionActions.setFeedbackIsFetching(false));
+  } catch (error) {
+    // dispatch(suggestionActions.setFeedbackIsFetching(false));
+
+    console.log(error);
+  }
+};
 
 export const fetchSuggestions = () => {
   return async (dispatch) => {
     try {
       dispatch(suggestionActions.setFeedbackIsFetching(true));
-      const res = await getSuggestions();
-      dispatch(suggestionActions.initSuggestions(res));
+      getSuggestions((res) => {
+        dispatch(suggestionActions.initSuggestions(res));
+      });
+
       dispatch(suggestionActions.setFeedbackIsFetching(false));
 
       // getSuggestions((data) => dispatch(suggestionActions.initSuggestions(data)));
@@ -44,9 +51,10 @@ export const fetchAddFeedback = (data) => {
       dispatch(suggestionActions.setLoading(true));
 
       const resAddFeedback = await addFeedback(data);
-      const resGetFeedback = await getFeedback(resAddFeedback.id);
-      console.log("getFeedback", resGetFeedback);
-      dispatch(suggestionActions.addFeedback(resGetFeedback));
+      // const resGetFeedback = await getFeedback(resAddFeedback.id);
+      await addFeedbackInit(resAddFeedback.id); //dodavanje id-ija u initijalni dokument u firestore(zbog resetovanja podataka)
+
+      // dispatch(suggestionActions.addFeedback(resGetFeedback));
       dispatch(suggestionActions.setLoading(false));
     } catch (error) {
       dispatch(suggestionActions.setLoading(false));
@@ -87,15 +95,32 @@ export const fetchGetFeedback = (feedbackId) => {
     }
   };
 };
+export const fetchUpdateFeedback = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(suggestionActions.setFeedbackIsUpdating(true)); //1
+      const { createdAt, ...rest } = data; //createdAt is string. firestore createdAt is timestamp
+      await updateFeedback(data.id, rest); //2 wait
 
-export const fetchUpdateFeedbackVotes = (data) => {
+      dispatch(suggestionActions.updateFeedback({ message: "Update feedback", data })); //3
+      // dispatch(suggestionActions.setOpenedFeedback(data)); //3
+
+      dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
+    } catch (error) {
+      dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
+      console.log(error);
+    }
+  };
+};
+
+export const fetchUpdateFeedbackVotes = (method, data) => {
   return async (dispatch) => {
     try {
       dispatch(suggestionActions.setFeedbackIsUpdating(true)); //1
       console.log("dispatchujem", data.id);
-      await updateFeedback(data.id, { upVotes: data.upVotes }); //2 wait
+      await updateFeedbackVote(method, data.id); //2 wait
 
-      dispatch(suggestionActions.updateFeedback(data)); //3
+      dispatch(suggestionActions.updateFeedback({ message: "voted", data })); //3
       dispatch(suggestionActions.setOpenedFeedback(data)); //3
 
       dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
@@ -114,42 +139,20 @@ export const fetchUpdateFeedbackComments = (data, openedFeedback) => {
         await addComment(data.feedbackId, data.commentData);
       }
       if (data.method === "remove") {
-        console.log(data.commentData);
-
         await removeComment(data.feedbackId, data.commentData);
       }
       if (data.method === "update") {
-        console.log("Updateujem", data.commentData);
-
+        await updateComment(data);
+      }
+      if (data.method === "add reply") {
+        await updateComment(data);
+      }
+      if (data.method === "delete reply") {
         await updateComment(data);
       }
 
-      dispatch(suggestionActions.updateFeedbackComments(openedFeedback)); //3
+      dispatch(suggestionActions.updateFeedbackComments({ openedFeedback, method: data.method })); //3
       dispatch(suggestionActions.setOpenedFeedback(openedFeedback)); //3
-
-      dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
-    } catch (error) {
-      dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
-      console.log(error);
-    }
-  };
-};
-
-export const fetchUpdateFeedbackCommentReply = (data) => {
-  return async (dispatch) => {
-    try {
-      dispatch(suggestionActions.setFeedbackIsUpdating(true)); //1
-      // if (data.method === "add") {
-      //   await addComment(data.feedbackId, data.commentData);
-      // }
-      // if (data.method === "remove") {
-      //   console.log(data.commentData);
-
-      //   await removeComment(data.feedbackId, data.commentData);
-      // }
-
-      dispatch(suggestionActions.updateFeedbackCommentReplay(data)); //3
-      // dispatch(suggestionActions.setOpenedFeedback(openedFeedback)); //3
 
       dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
     } catch (error) {

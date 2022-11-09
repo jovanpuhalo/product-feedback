@@ -4,6 +4,10 @@
   padding: 2rem 0;
   padding-left: 7.5rem;
 
+  @include respond(breakpoint2) {
+    padding-left: 0;
+  }
+
   &__header {
     display: flex;
     align-items: flex-end;
@@ -19,6 +23,9 @@
     }
     &__user {
       margin-left: 2.5rem;
+      @include respond(breakpoint2) {
+        margin-left: 0.5rem;
+      }
       & :first-child {
         display: block;
         font-size: 1.5rem;
@@ -35,6 +42,7 @@
       font-size: 1.5rem;
       color: $color-primary-button-text;
       font-weight: 800;
+
       & :first-child {
         cursor: pointer;
       }
@@ -56,7 +64,10 @@
     text-align: justify;
     color: $color-prymary-text;
     font-size: 1.5rem;
-    word-wrap: break-word;
+    word-break: break-word;
+    @include respond(breakpoint2) {
+      margin-left: 5.5rem;
+    }
 
     &__reply-to {
       color: $color-primary-button;

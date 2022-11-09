@@ -4,7 +4,7 @@
   grid-column: suggestion-start/suggestion-end;
   grid-row: 1/2;
 
-  max-width: 73rem;
+  // max-width: 73rem;
   height: 100%;
   border-radius: 1rem;
   background-color: variables.$color-primary-header;
@@ -14,12 +14,23 @@
   padding: 0 2rem;
   color: rgb(197, 198, 202);
 
+  @include respond(breakpoint2) {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    border-radius: 0;
+    padding: 1rem 2rem;
+  }
+
   & button {
     margin-left: auto;
   }
 
   & img {
     margin-right: 2rem;
+
+    @include respond(breakpoint1) {
+      display: none;
+    }
   }
 
   &__number {
@@ -29,8 +40,13 @@
     font-size: 2rem;
     font-weight: 700;
     margin-right: 3rem;
+
+    @include respond(breakpoint1) {
+      display: none;
+    }
   }
   &__sort {
+    min-width: 5rem;
     color: $color-white;
     font-size: 1.5rem;
     font-weight: 400;
