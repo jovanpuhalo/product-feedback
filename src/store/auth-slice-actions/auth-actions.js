@@ -1,45 +1,13 @@
-import {
-  addUser,
-  getUser,
-  signIn,
-  signUp,
-  signOutUser,
-  currentSignInUser,
-  addUserInit,
-  getInitDeleteId,
-} from "../../firebase/firebase";
+import { getUser, signIn, signUp, signOutUser, initDeleteFeedbacks } from "../../firebase/firebase";
 import { authActions } from "./auth-slice";
 
 export const createUser = (data) => {
   return async (dispatch) => {
     dispatch(authActions.setIsLoading(true));
     try {
-      const res = await signUp(data.email, data.password);
-      if (res) {
-        await addUser(
-          {
-            name: data.fullname,
-            image: data.image,
-            status: "user",
-            email: data.email,
-            username: data.username,
-            upVotedSugestions: data.upVotedSugestions,
-          },
-          res.user.uid
-        );
-        // await signOutUser();
-        await addUserInit(res.user.uid); //dodavanje id-ija u initijalni dokument u firestore(zbog resetovanja podataka)
-      }
+      await signUp(data);
+
       dispatch(authActions.createUser());
-      //   dispatch(
-      //     authActions.createUser({
-      //       name: data.fullname,
-      //       image: data.image,
-      //       email: data.email,
-      //       username: data.username,
-      //       userId: res.user.uid,
-      //     })
-      //   );
     } catch (error) {
       console.log(error.message);
       dispatch(authActions.setError(error.message));
@@ -52,7 +20,7 @@ export const login = (email, password) => {
     dispatch(authActions.setIsLoading(true));
     try {
       const res = await signIn(email, password);
-      await getInitDeleteId();
+      await initDeleteFeedbacks();
       if (res) {
         const user = await getUser(res.uid);
         const data = {
@@ -65,25 +33,20 @@ export const login = (email, password) => {
       }
     } catch (error) {
       console.log(error.message);
-      dispatch(authActions.setIsLoading(false));
-
-      //   dispatch(authActions.setError(error.message));
+      dispatch(authActions.setError(error.message));
     }
   };
 };
-export const getCurrentSignInUser = () => {
+export const getCurrentSignInUser = (uid) => {
   return async (dispatch) => {
-    currentSignInUser(async (currentUser) => {
-      const user = await getUser(currentUser.uid);
-      // dispatch(fetchSuggestions());
+    const user = await getUser(uid);
+    console.log("pribavljen USER", user);
 
-      const data = {
-        token: currentUser.accessToken,
-        userId: currentUser.uid,
-        ...user,
-      };
-      dispatch(authActions.userLogin(data));
-    });
+    const data = {
+      userId: uid,
+      ...user,
+    };
+    dispatch(authActions.userLogin(data));
   };
 };
 

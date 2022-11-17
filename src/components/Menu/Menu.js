@@ -28,7 +28,7 @@ const Menu = () => {
       <div className={`menu ${menuIsOpen ? "menu-show" : "menu-hide"}`}>
         {isUserLoggedIn ? (
           <div className="menu__user">
-            <UserMenu />
+            <UserMenu mobile />
           </div>
         ) : (
           <div className="menu__button-box">

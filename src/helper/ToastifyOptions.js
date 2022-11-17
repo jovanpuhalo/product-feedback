@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-// import "./toastify.scss";
 
 export const options = {
   autoClose: 2000,

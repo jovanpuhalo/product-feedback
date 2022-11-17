@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { formatDate } from "../../helper/dateFormater";
 import MoonLoader from "react-spinners/MoonLoader";
+import { motion } from "framer-motion";
 
 const UserInfo = ({ feedback, user, createdAt }) => {
   const [feedbackUser, setFeedbackUser] = useState({});
@@ -18,7 +19,7 @@ const UserInfo = ({ feedback, user, createdAt }) => {
   }
 
   return (
-    <div className="user">
+    <motion.div layout transition={{ duration: 0 }} className="user">
       <div className="user__photo">
         {loading ? (
           <div className="spinner-layout">
@@ -34,7 +35,7 @@ const UserInfo = ({ feedback, user, createdAt }) => {
       ) : (
         <div className="user__username">{`@${currentUser.username}`}</div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

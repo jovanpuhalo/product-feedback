@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { commentVariants } from "../../helper/variants";
 import { fetchUpdateFeedbackComments } from "../../store/suggestions-slice-actions/suggestio-actions";
 
 import { fetchGetUser } from "../../store/user-slice-actions/user-actions";
 import ReplyForm from "../ReplyForm/ReplyForm";
+import { motion } from "framer-motion";
+import { uiActions } from "../../store/ui-slice/ui-slice";
 
 const Reply = ({ reply, comment, scroll }) => {
   const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -22,7 +25,6 @@ const Reply = ({ reply, comment, scroll }) => {
   }, [reply]);
 
   const onDeleteHandler = () => {
-    // let updatedFeedback = { ...openedFeedback };
     let comments = [...openedFeedback.comments];
     const indexComment = comments.indexOf(comment);
 
@@ -41,6 +43,15 @@ const Reply = ({ reply, comment, scroll }) => {
       feedbackId: openedFeedback.id,
       commentData: comments,
     };
+    //sprecavanje brisanja default data (konkretno reply na ovom indexu)
+    if (indexReply === 1 && indexComment === 1 && openedFeedback.id === "Hbt1BBoewGUngeCT0ZdT") {
+      dispatch(uiActions.setModalIsOpen(true));
+      dispatch(
+        uiActions.setModalMessage("You cannot delete this reply. Please create a new reply to test this option.")
+      );
+      return;
+    }
+
     dispatch(fetchUpdateFeedbackComments(data, openedFeedback));
   };
 
@@ -71,7 +82,7 @@ const Reply = ({ reply, comment, scroll }) => {
     scroll();
   };
   return (
-    <div className="reply">
+    <motion.div className="reply" variants={commentVariants} initial="hidden" animate="visible" exit="exit">
       <div className="reply__header">
         <div className="reply__header__photo">
           <img src={user.image} alt="" />
@@ -95,7 +106,7 @@ const Reply = ({ reply, comment, scroll }) => {
         {reply.reply}
       </div>
       <ReplyForm className={showReply ? "show-reply" : ""} postReplyHandler={onPostReplyHandler} />
-    </div>
+    </motion.div>
   );
 };
 

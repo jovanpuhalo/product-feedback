@@ -16,6 +16,9 @@ import {
 import Comment from "../Comment/Comment";
 import CommentsLayout from "../layouts/CommentsLayout/CommentsLayout";
 import { uiActions } from "../../store/ui-slice/ui-slice";
+import { variantsPage } from "../../helper/variants";
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const override = {
   translate: "0 -8px",
@@ -66,14 +69,29 @@ const FeedbackDetail = () => {
   };
 
   const onDeleteHandler = () => {
+    if (openedFeedback.id === "Hbt1BBoewGUngeCT0ZdT") {
+      dispatch(uiActions.setModalIsOpen(true));
+      dispatch(
+        uiActions.setModalMessage("You cannot delete this feedback. Please create a new feedback to test this option.")
+      );
+      return;
+    }
+
     dispatch(fetchDeleteFeedback(openedFeedback.id));
   };
 
   const onEditHandler = () => {
+    if (openedFeedback.id === "Hbt1BBoewGUngeCT0ZdT") {
+      dispatch(uiActions.setModalIsOpen(true));
+      dispatch(
+        uiActions.setModalMessage("You cannot edit this feedback. Please create a new feedback to test this option.")
+      );
+      return;
+    }
     navigate(`/feedback/${openedFeedback.id}/edit`, { replace: true });
   };
   return (
-    <Fragment>
+    <motion.div variants={variantsPage} initial="hidden" animate="visible" exit="exit">
       {!feedbackIsFetching ? (
         <div className="feedback-detail-layout">
           <div className="feedback-detail__header">
@@ -99,11 +117,13 @@ const FeedbackDetail = () => {
             ) : null}
           </div>
 
-          <Feedback item={openedFeedback} />
+          <Feedback item={openedFeedback} clickable={false} />
           <CommentsLayout numberOfComemnts={openedFeedback.comments?.length}>
-            {openedFeedback.comments?.map((comment, index) => (
-              <Comment key={index} comment={comment} />
-            ))}
+            <AnimatePresence>
+              {openedFeedback.comments?.map((comment, index) => (
+                <Comment key={index} comment={comment} />
+              ))}
+            </AnimatePresence>
           </CommentsLayout>
           <div className="add-comment">
             <div className="add-comment__title">Add Comment</div>
@@ -117,13 +137,7 @@ const FeedbackDetail = () => {
             ></textarea>
             <div className="add-comment__character-button">
               <div> {250 - comment.length} characters left</div>
-              <Button onClick={postCommentHandler}>
-                {feedbackIsUpdating ? (
-                  <PropagateLoader loading={feedbackIsUpdating} color={"white"} cssOverride={override} />
-                ) : (
-                  "Post Comment"
-                )}
-              </Button>
+              <Button onClick={postCommentHandler}>Post Comment</Button>
             </div>
           </div>
         </div>
@@ -132,7 +146,7 @@ const FeedbackDetail = () => {
           <MoonLoader size={100} speedMultiplier={1} color="rgb(70, 97, 230)" />
         </div>
       )}
-    </Fragment>
+    </motion.div>
   );
 };
 

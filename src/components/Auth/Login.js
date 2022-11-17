@@ -5,7 +5,11 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { login } from "../../store/auth-slice-actions/auth-actions";
+import XButton from "../../assets/xbutton.png";
+
 import { uiActions } from "../../store/ui-slice/ui-slice";
+import { variantsPage } from "../../helper/variants";
+import { motion } from "framer-motion";
 
 const override = {
   translate: "0 -8px",
@@ -13,6 +17,7 @@ const override = {
 const Login = () => {
   const isLoading = useSelector((state) => state.authReducer.isLoading);
   const isUserLoggedIn = useSelector((state) => state.authReducer.isUserLoggedIn);
+  const error = useSelector((state) => state.authReducer.error);
 
   const dispatch = useDispatch();
 
@@ -26,24 +31,31 @@ const Login = () => {
   };
 
   useEffect(() => {
+    document.body.style.overflowX = "hidden";
+    document.getElementsByTagName("html")[0].style.overflowX = "hidden";
     if (isUserLoggedIn) navigate("/", { replace: true });
+    return () => {
+      document.body.style = {};
+      document.getElementsByTagName("html")[0].style = {};
+    };
   }, [isUserLoggedIn, navigate]);
 
   return (
-    <div className="auth-layout">
+    <motion.div className="auth-layout" variants={variantsPage} initial="hidden" animate="visible" exit="exit">
       <div className="login-container">
         <div className="login-form">
           <h2>Sign In</h2>
           <div className="login-form__input-box">
-            <input type="text" required="required" ref={emailRef} />
+            <input type="text" required="required" defaultValue={"zenakelley@email.com"} ref={emailRef} />
             <span>Email</span>
             <i></i>
           </div>
           <div className="login-form__input-box">
-            <input type="password" required="required" ref={passwordRef} />
+            <input type="password" required="required" defaultValue={"zenakelley"} ref={passwordRef} />
             <span>Password</span>
             <i></i>
           </div>
+          <div className="login-form__error">{error}</div>
           <Button style={{ width: "100%", marginTop: "3rem" }} onClick={logInHandler}>
             {isLoading ? <PropagateLoader loading={isLoading} color={"white"} cssOverride={override} /> : "Login"}
           </Button>
@@ -54,9 +66,9 @@ const Login = () => {
         </div>
       </div>
       <NavLink className="exit" to={"/"}>
-        <img src="/assets/xbutton.png" alt="" />
+        <img src={XButton} alt="" />
       </NavLink>
-    </div>
+    </motion.div>
   );
 };
 

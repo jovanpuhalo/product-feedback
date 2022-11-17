@@ -5,6 +5,7 @@ import { fetchUpdateUser } from "../../store/user-slice-actions/user-actions";
 
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { uiActions } from "../../store/ui-slice/ui-slice";
+import { motion } from "framer-motion";
 
 const VoteButton = ({ item, className }) => {
   const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -44,13 +45,15 @@ const VoteButton = ({ item, className }) => {
     }
   };
   return (
-    <div
+    <motion.div
+      layout
+      transition={{ duration: 0 }}
       className={`vote ${isVoted ? "vote__active" : ""} ${className ? "vote__roadmap" : ""}`}
       onClick={onVoteClickHandler}
     >
       <MdKeyboardArrowUp className="vote__icon" />
       <div>{upVotes}</div>
-    </div>
+    </motion.div>
   );
 };
 

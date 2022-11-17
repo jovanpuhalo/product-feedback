@@ -3,8 +3,10 @@
   height: fit-content;
   // background-color: white;
   margin: 0 auto;
-  margin-top: 8rem;
+  // margin-top: 8rem;
   padding-bottom: 4rem;
+  padding-top: 4rem;
+  overflow: hidden;
   @include respond(breakpoint2) {
     width: 90%;
   }

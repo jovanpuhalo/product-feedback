@@ -18,6 +18,10 @@
     flex-direction: column;
     gap: 1rem;
 
+    @include respond(breakpoint2) {
+      margin-bottom: 1.5rem;
+    }
+
     & div {
       display: flex;
       justify-content: space-between;
@@ -32,11 +36,34 @@
       color: $color-prymary-text;
       font-size: 1.5rem;
       border-radius: 0.7rem;
-
+      // @include respond(breakpoint2) {
+      //   padding: 1rem;
+      //   font-size: 1rem;
+      // }
       &::placeholder {
         color: rgba($color-prymary-text, 0.5);
       }
     }
+    input[type="file"] {
+      display: none;
+    }
+    label[for="file"] {
+      padding: 1.5rem;
+      background-color: $color-background-body;
+      border-radius: 1rem;
+      @include respond(breakpoint2) {
+        padding: 1rem;
+      }
+    }
+    [data-photo] {
+      color: rgb(38, 0, 255);
+      font-size: 1.5rem;
+      height: 1.5rem;
+      // @include respond(breakpoint2) {
+      //   height: 1rem;
+      // }
+    }
+
     & label {
       font-size: 1.6rem;
       font-weight: 600;

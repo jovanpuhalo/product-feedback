@@ -5,6 +5,8 @@ import { uiActions } from "../../store/ui-slice/ui-slice";
 import { fetchGetUser } from "../../store/user-slice-actions/user-actions";
 import Reply from "../Reply/Reply";
 import ReplyForm from "../ReplyForm/ReplyForm";
+import { commentVariants } from "../../helper/variants";
+import { motion } from "framer-motion";
 
 const Comment = ({ comment }) => {
   const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -15,7 +17,6 @@ const Comment = ({ comment }) => {
   const [user, setUser] = useState({});
   const [showReply, setShowReply] = useState(false);
   const [editComent, setEditComment] = useState(false);
-  // const user = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
 
   const onDeleteHandler = () => {
@@ -24,7 +25,7 @@ const Comment = ({ comment }) => {
       dispatch(uiActions.setModalMessage("You are not logged in."));
       return;
     }
-    // let updatedFeedback = { ...openedFeedback };
+
     let comments = [...openedFeedback.comments];
     const index = comments.indexOf(comment);
     comments.splice(index, 1);
@@ -35,6 +36,14 @@ const Comment = ({ comment }) => {
       feedbackId: openedFeedback.id,
       commentData: comment,
     };
+
+    if (index === 0 && openedFeedback.id === "Tz0tfCqA8uTqf80xEXb0") {
+      dispatch(uiActions.setModalIsOpen(true));
+      dispatch(
+        uiActions.setModalMessage("You cannot delete this comment. Please create a new comment to test this option.")
+      );
+      return;
+    }
     dispatch(fetchUpdateFeedbackComments(data, openedFeedback));
   };
 
@@ -123,7 +132,14 @@ const Comment = ({ comment }) => {
   }, [comment]);
 
   return (
-    <div className="comment" ref={replyRef}>
+    <motion.div
+      className="comment"
+      ref={replyRef}
+      variants={commentVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <div className="comment__header">
         <div className="comment__header__photo">
           <img src={user.image} alt="" />
@@ -150,11 +166,13 @@ const Comment = ({ comment }) => {
         commentIfEdit={editComent}
         editReply={onPostEditHandler}
       />
-      {/* <Reply /> */}
-      {comment.replies?.map((reply, index) => (
-        <Reply key={index} reply={reply} comment={comment} scroll={scroll} />
-      ))}
-    </div>
+
+      <ul>
+        {comment.replies?.map((reply, index) => (
+          <Reply key={index} reply={reply} comment={comment} scroll={scroll} />
+        ))}
+      </ul>
+    </motion.div>
   );
 };
 

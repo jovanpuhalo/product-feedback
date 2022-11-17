@@ -1,6 +1,5 @@
 export const formatDate = (d) => {
   const date = new Date(d);
-  const today = new Date();
 
   const dayName = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
   let day = dayFormat(new Intl.DateTimeFormat("en-US", { day: "numeric" }).format(date));

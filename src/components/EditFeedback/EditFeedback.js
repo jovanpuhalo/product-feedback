@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
+import EditFeedbackImage from "../../assets/shared/icon-edit-feedback.svg";
+
 import { optionsStatusFeedback, optionsAddFeedback, customStyles } from "../../helper/select-style-options";
 import Button from "../ui/Buttons/Button";
 import { fetchUpdateFeedback } from "../../store/suggestions-slice-actions/suggestio-actions";
@@ -42,14 +44,13 @@ const EditFeedback = () => {
     <Fragment>
       <div className="add-feedback">
         <h2>Editing </h2>
-        <img src="/assets/shared/icon-edit-feedback.svg" alt="" className="add-feedback__icon2" />
+        <img src={EditFeedbackImage} alt="" className="add-feedback__icon2" />
         <div className={`add-feedback__controls ${errors.title?.message && "error"}`}>
           <p data-title>Feedback Title</p>
           <p data-dscription>Add a short, descriptive headline</p>
           <input
             type="text"
             maxLength={45}
-            // value={openedFeedback.title}
             {...register("title", {
               value: openedFeedback.title,
               required: { message: "Title is required!", value: true },

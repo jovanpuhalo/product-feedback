@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { optionsAddFeedback, customStyles } from "../../helper/select-style-options";
+import NewFeedback from "../../assets/shared/icon-new-feedback.svg";
 import Button from "../ui/Buttons/Button";
 import { fetchAddFeedback } from "../../store/suggestions-slice-actions/suggestio-actions";
-// import { useQuery } from "@tanstack/react-query";
 
 const AddFeedback = () => {
   const currentUser = useSelector((state) => state.authReducer.currentUser);
@@ -42,7 +42,7 @@ const AddFeedback = () => {
     <Fragment>
       <div className="add-feedback">
         <h2>Create New Feedback</h2>
-        <img src="assets/shared/icon-new-feedback.svg" alt="" className="add-feedback__icon" />
+        <img src={NewFeedback} alt="" className="add-feedback__icon" />
         <div className={`add-feedback__controls ${errors.title?.message && "error"}`}>
           <p data-title>Feedback Title</p>
           <p data-dscription>Add a short, descriptive headline</p>

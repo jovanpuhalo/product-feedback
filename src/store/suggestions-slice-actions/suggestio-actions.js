@@ -10,18 +10,13 @@ import {
   deleteFeedback,
   updateFeedbackVote,
   addFeedbackInit,
-  getInitDeleteId,
+  initDeleteFeedbacks,
 } from "../../firebase/firebase";
 
 export const initDelete = async () => {
   try {
-    // dispatch(suggestionActions.setFeedbackIsFetching(true));
-    await getInitDeleteId();
-    // dispatch(suggestionActions.initSuggestions(res));
-    // dispatch(suggestionActions.setFeedbackIsFetching(false));
+    await initDeleteFeedbacks();
   } catch (error) {
-    // dispatch(suggestionActions.setFeedbackIsFetching(false));
-
     console.log(error);
   }
 };
@@ -30,13 +25,12 @@ export const fetchSuggestions = () => {
   return async (dispatch) => {
     try {
       dispatch(suggestionActions.setFeedbackIsFetching(true));
-      getSuggestions((res) => {
+
+      await getSuggestions((res) => {
         dispatch(suggestionActions.initSuggestions(res));
       });
 
       dispatch(suggestionActions.setFeedbackIsFetching(false));
-
-      // getSuggestions((data) => dispatch(suggestionActions.initSuggestions(data)));
     } catch (error) {
       dispatch(suggestionActions.setFeedbackIsFetching(false));
 
@@ -51,10 +45,8 @@ export const fetchAddFeedback = (data) => {
       dispatch(suggestionActions.setLoading(true));
 
       const resAddFeedback = await addFeedback(data);
-      // const resGetFeedback = await getFeedback(resAddFeedback.id);
       await addFeedbackInit(resAddFeedback.id); //dodavanje id-ija u initijalni dokument u firestore(zbog resetovanja podataka)
 
-      // dispatch(suggestionActions.addFeedback(resGetFeedback));
       dispatch(suggestionActions.setLoading(false));
     } catch (error) {
       dispatch(suggestionActions.setLoading(false));
@@ -103,7 +95,6 @@ export const fetchUpdateFeedback = (data) => {
       await updateFeedback(data.id, rest); //2 wait
 
       dispatch(suggestionActions.updateFeedback({ message: "Update feedback", data })); //3
-      // dispatch(suggestionActions.setOpenedFeedback(data)); //3
 
       dispatch(suggestionActions.setFeedbackIsUpdating(false)); //3
     } catch (error) {

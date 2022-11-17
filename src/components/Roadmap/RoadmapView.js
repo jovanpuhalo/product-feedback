@@ -24,11 +24,11 @@ const RoadmapView = () => {
       <ul>
         <li>
           <span>Planned</span>
-          <span>{inProgress.length}</span>
+          <span>{planned.length}</span>
         </li>
         <li>
           <span>In-Progress</span>
-          <span>{planned.length}</span>
+          <span>{inProgress.length}</span>
         </li>
         <li>
           <span>Live</span>

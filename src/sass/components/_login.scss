@@ -13,8 +13,8 @@
     top: -50%;
     left: -50%;
     content: "";
-    height: 55rem;
-    width: 46.5rem;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(0deg, transparent, $color-primary-button, $color-primary-button);
     transform-origin: bottom right;
     animation: animate1 4s linear infinite;
@@ -24,8 +24,8 @@
     top: -50%;
     left: -50%;
     content: "";
-    height: 55rem;
-    width: 46.5rem;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(0deg, transparent, $color-primary-button, $color-primary-button);
     transform-origin: bottom right;
     animation: animate2 4s linear infinite;
@@ -118,6 +118,10 @@
       }
     }
   }
+  &__error {
+    color: red;
+    font-size: 1.5rem;
+  }
 }
 
 .exit {
@@ -130,6 +134,10 @@
   border: 1px solid $color-background-body;
   border-radius: 50%;
   cursor: pointer;
+
+  @include respond(breakpoint2) {
+    display: none;
+  }
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.247);
@@ -145,18 +153,18 @@
 
 @keyframes animate1 {
   0% {
-    rotate: 0deg;
+    transform: rotate(0deg);
   }
   100% {
-    rotate: 360deg;
+    transform: rotate(360deg);
   }
 }
 
 @keyframes animate2 {
   0% {
-    rotate: 180deg;
+    transform: rotate(180deg);
   }
   100% {
-    rotate: 540deg;
+    transform: rotate(540deg);
   }
 }

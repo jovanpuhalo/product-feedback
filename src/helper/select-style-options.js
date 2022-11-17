@@ -59,7 +59,6 @@ export const customStyles = {
 
     return {
       ...provided,
-      // minWidth: "300px",
 
       borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
       fontSize: "16px",
@@ -102,11 +101,8 @@ export const sortStyles = {
   menu: (provided, state) => ({
     ...provided,
     borderRadius: "0 0 20px 20px",
-    // border: "1px solid rgb(70, 97, 230)",
     borderTop: "none",
-    // boxShadow: "none",
     translate: "0 10px",
-    // color: "red",
   }),
   singleValue: (provided, state) => ({
     ...provided,
@@ -117,7 +113,6 @@ export const sortStyles = {
 
     padding: "0",
     borderRadius: "0 0 20px 20px",
-    // color: "red",
   }),
 
   option: (provided, state) => {
@@ -132,7 +127,6 @@ export const sortStyles = {
 
     return {
       ...provided,
-      // minWidth: "300px",
 
       borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
       fontSize: "16px",

@@ -11,9 +11,7 @@
   display: grid;
   grid-template-columns: 4rem 1fr 6rem;
   grid-template-rows: 5.5rem 1fr 4rem;
-  // transition: all 0.5s ease;
-
-  // animation: moveUp 0.5s ease forwards;
+  border-left: 4px solid transparent;
 
   @include respond(breakpoint2) {
     padding: 2rem;
@@ -21,6 +19,12 @@
 
   &__clickable {
     cursor: pointer;
+    &:hover {
+      border-left: 4px solid $color-primary-button-text;
+    }
+  }
+  &__expand {
+    height: fit-content;
   }
 
   &__feedback {
@@ -108,7 +112,8 @@
   }
 }
 
-.feedback__roadmap {
-  grid-template-columns: 35rem;
-  grid-template-rows: repeat(4, min-content);
+.feedback-roadmap {
+  &:hover {
+    border-left: none;
+  }
 }

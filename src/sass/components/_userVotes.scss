@@ -1,0 +1,17 @@
+.votes {
+  &__header {
+    margin: 4rem 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-white;
+    padding: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    &__number {
+      font-size: 1.7rem;
+      font-weight: 700;
+      text-align: right;
+      color: $color-prymary-text;
+    }
+  }
+}

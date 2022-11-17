@@ -8,6 +8,7 @@ import Select from "react-select";
 import { useNavigate } from "react-router";
 import Button from "../ui/Buttons/Button";
 import { uiActions } from "../../store/ui-slice/ui-slice";
+import BulbImg from "../../assets/bulb.png";
 
 const SuggestionsHeader = () => {
   const isUserLoggedIn = useSelector((state) => state.authReducer.isUserLoggedIn);
@@ -32,7 +33,7 @@ const SuggestionsHeader = () => {
 
   return (
     <div className="suggestions-header">
-      <img src="/assets/bulb.png" alt="" />
+      <img src={BulbImg} alt="" />
       <div className="suggestions-header__number">{filteredSuggestions.length} Suggestions</div>
       <div className="suggestions-header__sort">Sort by:</div>
       <Select

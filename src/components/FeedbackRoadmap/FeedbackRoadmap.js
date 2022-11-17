@@ -3,6 +3,10 @@ import VoteButton from "../VoteButton/VoteButton";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { suggestionActions } from "../../store/suggestions-slice-actions/suggestion-slice";
+import { roadMapItemVariants } from "../../helper/variants";
+import CommentImg from "../../assets/shared/icon-comments.svg";
+
+import { motion } from "framer-motion";
 
 const FeedbackRoadmap = ({ item, clickable, className }) => {
   const navigate = useNavigate();
@@ -18,7 +22,13 @@ const FeedbackRoadmap = ({ item, clickable, className }) => {
 
   const classes = `feedback-roadmap ${clickable ? "feedback__clickable" : ""}  ${className ? className : ""}`;
   return (
-    <div className={classes} onClick={onFeedbackClikcHandler}>
+    <motion.div
+      className={classes}
+      onClick={onFeedbackClikcHandler}
+      variants={roadMapItemVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <span>{className}</span>
       <div className="feedback-roadmap__feedback">
         <div className="feedback-roadmap__feedback__title">{item?.title}</div>
@@ -31,11 +41,11 @@ const FeedbackRoadmap = ({ item, clickable, className }) => {
       <div className="feedback-roadmap__comment-vote">
         <VoteButton item={item} className="vote__roadmap" />
         <div className="feedback-roadmap__comment-vote__comments">
-          <img src="/assets/shared/icon-comments.svg" alt="" />
+          <img src={CommentImg} alt="" />
           <div>{item.comments?.length}</div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

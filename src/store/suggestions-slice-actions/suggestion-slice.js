@@ -14,7 +14,6 @@ const suggestionsSlice = createSlice({
     openedFeedback: {},
     suggestions: [],
     filteredSuggestions: [],
-    // numberOfilteredSuggestions: 0,
     filter: "All",
     sortOption: { order: "asc", criteria: "createdAt" },
   },
@@ -147,9 +146,6 @@ const suggestionsSlice = createSlice({
     setOpenedFeedback(state, action) {
       state.openedFeedback = action.payload;
     },
-    // setNumberOfFilteredSuggestions(state, action) {
-    //   state.numberOfilteredSuggestions = action.payload;
-    // },
   },
 });
 export const suggestionActions = suggestionsSlice.actions;

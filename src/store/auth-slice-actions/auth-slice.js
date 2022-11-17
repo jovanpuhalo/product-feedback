@@ -23,7 +23,13 @@ const authSlice = createSlice({
     },
 
     setError(state, action) {
-      state.error = action.payload;
+      const error = action.payload;
+      if (error.includes("wrong-password")) {
+        state.error = "wrong-password";
+      }
+      if (error.includes("user-not-found")) {
+        state.error = "user-not-found";
+      }
       state.isLoading = false;
       state.userIsCreated = false;
     },
@@ -34,15 +40,18 @@ const authSlice = createSlice({
     },
 
     userLogin(state, action) {
+      localStorage.setItem("userId", action.payload.userId);
       state.isUserLoggedIn = true;
       state.currentUser = { ...action.payload };
       state.isLoading = false;
+      state.error = "";
     },
     userLogOut(state) {
+      localStorage.removeItem("userId");
+
       state.isUserLoggedIn = false;
       state.currentUser = {};
       state.isLoading = false;
-      localStorage.removeItem("loggedUser");
       toast.success(`You are successfully logged out.`, { ...options });
     },
     updateCurrentUser(state, action) {
