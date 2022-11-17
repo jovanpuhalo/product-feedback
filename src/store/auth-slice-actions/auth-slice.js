@@ -24,6 +24,10 @@ const authSlice = createSlice({
 
     setError(state, action) {
       const error = action.payload;
+      state.error = action.payload;
+      if (error.includes("invalid-email")) {
+        state.error = "invalid-email";
+      }
       if (error.includes("wrong-password")) {
         state.error = "wrong-password";
       }

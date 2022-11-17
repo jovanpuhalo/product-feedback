@@ -92,60 +92,68 @@ const FeedbackDetail = () => {
   };
   return (
     <motion.div variants={variantsPage} initial="hidden" animate="visible" exit="exit">
-      {!feedbackIsFetching ? (
-        <div className="feedback-detail-layout">
-          <div className="feedback-detail__header">
-            <GoBack />
-            {currentUser.userId === openedFeedback.userId || currentUser.status === "administrator" ? (
-              <>
-                <Button
-                  className="delete"
-                  style={{ marginLeft: "auto", marginRight: "1rem" }}
-                  onClick={onDeleteHandler}
-                >
-                  {feedbackIsDeleting ? (
-                    <PropagateLoader loading={feedbackIsDeleting} color={"white"} cssOverride={override} />
+      <div className="feedback-detail-layout">
+        {!feedbackIsFetching ? (
+          <>
+            <div className="feedback-detail__header">
+              <GoBack />
+              {currentUser.userId === openedFeedback.userId || currentUser.status === "administrator" ? (
+                <>
+                  <Button
+                    className="delete"
+                    style={{ marginLeft: "auto", marginRight: "1rem" }}
+                    onClick={onDeleteHandler}
+                  >
+                    {feedbackIsDeleting ? (
+                      <PropagateLoader loading={feedbackIsDeleting} color={"white"} cssOverride={override} />
+                    ) : (
+                      "Delete Feedback"
+                    )}
+                  </Button>
+
+                  <Button className="edit" onClick={onEditHandler}>
+                    Edit Feedback
+                  </Button>
+                </>
+              ) : null}
+            </div>
+
+            <Feedback item={openedFeedback} clickable={false} />
+            <CommentsLayout numberOfComemnts={openedFeedback.comments?.length}>
+              <AnimatePresence>
+                {openedFeedback.comments?.map((comment, index) => (
+                  <Comment key={index} comment={comment} />
+                ))}
+              </AnimatePresence>
+            </CommentsLayout>
+            <div className="add-comment">
+              <div className="add-comment__title">Add Comment</div>
+              <textarea
+                cols="30"
+                rows="4"
+                placeholder="Type your comment here"
+                value={comment}
+                maxLength="250"
+                onChange={textCountHandler}
+              ></textarea>
+              <div className="add-comment__character-button">
+                <div> {250 - comment.length} characters left</div>
+                <Button onClick={postCommentHandler}>
+                  {feedbackIsUpdating ? (
+                    <PropagateLoader loading={feedbackIsUpdating} color={"white"} cssOverride={override} />
                   ) : (
-                    "Delete Feedback"
+                    "Post Comment"
                   )}
                 </Button>
-
-                <Button className="edit" onClick={onEditHandler}>
-                  Edit Feedback
-                </Button>
-              </>
-            ) : null}
-          </div>
-
-          <Feedback item={openedFeedback} clickable={false} />
-          <CommentsLayout numberOfComemnts={openedFeedback.comments?.length}>
-            <AnimatePresence>
-              {openedFeedback.comments?.map((comment, index) => (
-                <Comment key={index} comment={comment} />
-              ))}
-            </AnimatePresence>
-          </CommentsLayout>
-          <div className="add-comment">
-            <div className="add-comment__title">Add Comment</div>
-            <textarea
-              cols="30"
-              rows="4"
-              placeholder="Type your comment here"
-              value={comment}
-              maxLength="250"
-              onChange={textCountHandler}
-            ></textarea>
-            <div className="add-comment__character-button">
-              <div> {250 - comment.length} characters left</div>
-              <Button onClick={postCommentHandler}>Post Comment</Button>
+              </div>
             </div>
+          </>
+        ) : (
+          <div className="spinner-layout">
+            <MoonLoader size={100} speedMultiplier={1} color="rgb(70, 97, 230)" />
           </div>
-        </div>
-      ) : (
-        <div className="spinner-layout">
-          <MoonLoader size={100} speedMultiplier={1} color="rgb(70, 97, 230)" />
-        </div>
-      )}
+        )}
+      </div>
     </motion.div>
   );
 };

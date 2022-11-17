@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { formatDate } from "../../helper/dateFormater";
 import MoonLoader from "react-spinners/MoonLoader";
 import { motion } from "framer-motion";
+import avatar from "../../assets/avatar.png";
 
 const UserInfo = ({ feedback, user, createdAt }) => {
   const [feedbackUser, setFeedbackUser] = useState({});
@@ -26,7 +27,7 @@ const UserInfo = ({ feedback, user, createdAt }) => {
             <MoonLoader loading={loading} size={30} speedMultiplier={1} color="rgb(70, 97, 230)" />
           </div>
         ) : (
-          <img src={feedback ? feedbackUser?.image : currentUser.image} alt="" />
+          <img src={feedback ? feedbackUser?.image : currentUser.image ? currentUser.image : avatar} alt="" />
         )}
       </div>
       <div className="user__name">{feedback ? feedbackUser?.name : currentUser.name}</div>

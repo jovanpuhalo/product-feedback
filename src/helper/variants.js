@@ -34,7 +34,6 @@ export const commentVariants = {
     height: 0,
     overflow: "hidden",
     padding: 0,
-    x: 75,
     transition: {
       duration: 0.3,
     },

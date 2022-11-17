@@ -46,7 +46,7 @@ export const getSuggestions = (dispatch) => {
 export const getUser = async (userId) => {
   try {
     const userData = await getDoc(doc(db, "users", userId));
-    const date = userData.data().createdAt.toDate().toString();
+    const date = userData.data()?.createdAt.toDate().toString();
 
     if (userData.exists()) {
       return { ...userData.data(), createdAt: date };
@@ -78,13 +78,16 @@ export const deleteUsers = async (id) => {
   const userData = await getDoc(docRef);
 
   await deleteDoc(docRef);
+
   //brisanje slike
-  const storageRef = ref(storage, userData.data().image);
-  deleteObject(storageRef)
-    .then(() => {
-      console.log("USPJESNO JE NEMA");
-    })
-    .catch((error) => {});
+  if (userData.data()?.image) {
+    const storageRef = ref(storage, userData.data().image);
+    deleteObject(storageRef)
+      .then(() => {
+        console.log("USPJESNO JE NEMA");
+      })
+      .catch((error) => {});
+  }
 
   await updateDoc(doc(db, "init", "start state"), {
     users: arrayRemove(id),

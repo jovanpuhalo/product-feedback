@@ -29,8 +29,8 @@ const Signup = () => {
   const [inputData, setInputData] = useState({});
   const [isUploading, setIsUploading] = useState(false);
   const [file, setFile] = useState("");
-  const [imgUrl, setImgUrl] = useState();
-  // const [uploadError, setUploadError] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [uploadError, setUploadError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const Signup = () => {
   }, [userIsCreated, navigate, dispatch, isUserLoggedIn]);
 
   useEffect(() => {
-    if (imgUrl) {
+    if (imgUrl || (isUploading && !file)) {
       const userData = {
         ...inputData,
         image: imgUrl,
@@ -85,7 +85,7 @@ const Signup = () => {
       console.log(userData);
       dispatch(createUser(userData));
     }
-  }, [imgUrl, inputData, dispatch]);
+  }, [imgUrl, inputData, dispatch, isUploading, file]);
 
   return (
     <motion.div className="auth-layout" variants={variantsPage} initial="hidden" animate="visible" exit="exit">
@@ -164,16 +164,17 @@ const Signup = () => {
           />
         </div>
 
-        {isUploading && (
+        {isUploading && file && (
           <ProgressBar
             file={file}
             setImgUrl={setImgUrl}
             setIsUploading={setIsUploading}
-            // setUploadError={setUploadError}
+            setUploadError={setUploadError}
           />
         )}
 
         {error && <p className="signup-error">{error}</p>}
+        {uploadError && <p className="signup-error">{uploadError}</p>}
         <Button style={{ width: "100%", marginTop: "3rem" }} onClick={handleSubmit(onSubmit)}>
           {isLoading ? <PropagateLoader loading={isLoading} color={"white"} cssOverride={override} /> : "Sign Up"}
         </Button>

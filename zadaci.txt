@@ -1,5 +1,0 @@
-
-6. previse loadinga--mozda moze neki stejt loading lokalno da se odradi
-7.suggestions srediti
-8. login error hendlvati
-9. loading za edit data

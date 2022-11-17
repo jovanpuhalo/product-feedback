@@ -1,23 +1,24 @@
 import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router";
+import { useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./sass/main.scss";
 import { fetchSuggestions } from "./store/suggestions-slice-actions/suggestio-actions";
-import { useDispatch, useSelector } from "react-redux";
+import { getCurrentSignInUser } from "./store/auth-slice-actions/auth-actions";
+import { authActions } from "./store/auth-slice-actions/auth-slice";
+import { uiActions } from "./store/ui-slice/ui-slice";
+import { AnimatePresence } from "framer-motion";
 import HomePage from "./Pages/HomePage";
 import AddFeedbakcPage from "./Pages/AddFeedbakcPage";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
-import { getCurrentSignInUser } from "./store/auth-slice-actions/auth-actions";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import EditFeedbakcPage from "./Pages/EdditFeedbackPage";
 import FeedbackDetailPage from "./Pages/FeedbackDetailPage";
 import RoadmapPage from "./Pages/RoadmapPage";
 import Modal from "./components/ui/Modal/Modal";
-import { uiActions } from "./store/ui-slice/ui-slice";
 import UserVotes from "./components/UserVotes/UserVotes";
-import { AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,10 @@ function App() {
       localStorage.removeItem("feedbackId");
     };
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(uiActions.setModalIsOpen(false));
+    dispatch(authActions.setError(""));
+  }, [dispatch, location]);
 
   return (
     <Fragment>
