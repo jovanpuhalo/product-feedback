@@ -11,10 +11,9 @@
     padding-top: 2rem;
   }
 
-  //   animation: moveUp 0.5s ease-in forwards;
   & h2 {
     font-size: 2.2rem;
-    color: $color-primary-header;
+    color: $color-primary-blue-dark;
     margin-bottom: 3rem;
   }
   &__icon {
@@ -40,7 +39,7 @@
     & [data-title] {
       font-size: 1.4rem;
       font-weight: 700;
-      color: $color-primary-header;
+      color: $color-primary-blue-dark;
       margin-bottom: 0.5rem;
     }
     & [data-dscription] {
@@ -63,7 +62,7 @@
       appearance: none;
 
       &:focus {
-        border-color: $color-primary-button-text;
+        border-color: $color-primary-blue;
         color: rgba(0, 0, 0, 0.5);
       }
     }

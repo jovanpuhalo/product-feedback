@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice/ui-slice";
 
 const MenuButton = (props) => {
-  console.log("renderujem button");
   const menuIsOpen = useSelector((state) => state.uiReducer.menuIsOpen);
 
   const dispatch = useDispatch();
@@ -14,7 +13,6 @@ const MenuButton = (props) => {
   useEffect(() => {
     if (menuIsOpen && !props.desktop) document.body.style.overflow = "hidden";
     return () => {
-      console.log("return");
       document.body.style.overflow = "auto";
       if (menuIsOpen) dispatch(uiActions.setMenuIsOpen(false));
       // dispatch(uiActions.setMenuIsOpen(false));

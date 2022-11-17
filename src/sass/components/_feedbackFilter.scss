@@ -1,6 +1,4 @@
 .feedback-filter {
-  // @include gridCellSetings;
-
   grid-row: feedbackFlter-start/roadmap-start;
   padding: 3rem;
   display: flex;
@@ -8,7 +6,4 @@
   gap: 1.5rem 2rem;
   background-color: $color-white;
   border-radius: 1rem;
-  @include respond(breakpoint2) {
-    // display: none;
-  }
 }

@@ -7,7 +7,6 @@ import FeedbackRoadmap from "../FeedbackRoadmap/FeedbackRoadmap";
 import useWindowSize from "../../hooks/useWindowWidth";
 import { roadMapVariants, variantsPage } from "../../helper/variants";
 import { motion, useAnimation } from "framer-motion";
-// import { AnimatePresence } from "framer-motion";
 
 const Roadmap = () => {
   const navigate = useNavigate();

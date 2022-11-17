@@ -1,14 +1,9 @@
 .roadmap {
-  // @include gridCellSetings;
   color: black;
   background-color: $color-white;
   grid-row: roadmap-start/roadmap-end;
   padding: 3rem;
   border-radius: 1rem;
-
-  @include respond(breakpoint2) {
-    // display: none;
-  }
 
   & div {
     display: flex;
@@ -24,7 +19,7 @@
   & a {
     font-size: 1.3rem;
     font-weight: 600;
-    color: $color-primary-button-text;
+    color: $color-primary-blue;
   }
 
   & ul li {

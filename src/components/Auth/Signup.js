@@ -52,11 +52,7 @@ const Signup = () => {
   };
 
   const onChangeHandler = (e) => {
-    console.log("slika", e.target.files[0].name);
-    // console.log("e.target", e.target.files[0]);
     if (e.target.files[0]) {
-      console.log("setujem sliku", e.target.files[0].name);
-      // setImageName(e.target.files[0].name);
       setFile(e.target.files[0]);
     }
   };
@@ -82,7 +78,6 @@ const Signup = () => {
         ...inputData,
         image: imgUrl,
       };
-      console.log(userData);
       dispatch(createUser(userData));
     }
   }, [imgUrl, inputData, dispatch, isUploading, file]);

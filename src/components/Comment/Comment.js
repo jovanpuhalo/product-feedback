@@ -85,7 +85,6 @@ const Comment = ({ comment }) => {
 
     dispatch(fetchUpdateFeedbackComments(data, openedFeedback));
     scroll();
-    // updatereply(feedbackId, reply);
   };
   const onPostEditHandler = (text) => {
     if (!isUserLoggedIn) {

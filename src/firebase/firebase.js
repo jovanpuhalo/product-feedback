@@ -83,9 +83,7 @@ export const deleteUsers = async (id) => {
   if (userData.data()?.image) {
     const storageRef = ref(storage, userData.data().image);
     deleteObject(storageRef)
-      .then(() => {
-        console.log("USPJESNO JE NEMA");
-      })
+      .then(() => {})
       .catch((error) => {});
   }
 

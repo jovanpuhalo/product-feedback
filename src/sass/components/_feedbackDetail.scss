@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  //   height: auto;
   padding-bottom: 2rem;
 }
 
@@ -33,7 +32,7 @@
     font-size: 1.7rem;
 
     &:focus {
-      border-color: $color-primary-button-text;
+      border-color: $color-primary-blue;
       color: rgba(0, 0, 0, 0.5);
     }
     &::placeholder {

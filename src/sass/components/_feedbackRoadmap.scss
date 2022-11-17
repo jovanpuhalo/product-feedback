@@ -1,20 +1,12 @@
-// .feedback-roadmap {
-//   display: grid;
-//   grid-template-columns: 35rem;
-//   grid-template-rows: repeat(4, min-content);
-// }
-
 .feedback-roadmap {
   width: 100%;
   max-width: 35rem;
   height: 31rem;
-  //   max-height: 38rem;
   background-color: $color-white;
   border-radius: 1rem;
   padding: 2.5rem 3rem;
 
   display: grid;
-  //   grid-template-columns: 35rem;
   grid-template-rows: min-content minmax(130px, min-content) min-content min-content;
   gap: 1.5rem;
   position: relative;
@@ -58,9 +50,8 @@
     grid-row: 2/3;
 
     &__title {
-      //   max-width: 50rem;
       word-wrap: break-word;
-      color: $color-primary-header;
+      color: $color-primary-blue-dark;
       font-size: 1.7rem;
       font-weight: 700;
       padding-bottom: 1rem;
@@ -69,10 +60,8 @@
       color: $color-prymary-text;
       font-size: 1.5rem;
       font-weight: 400;
-      //   width: 51rem;
       text-align: justify;
       word-wrap: break-word;
-      // white-space: nowrap;
     }
   }
   &__category {
@@ -80,7 +69,7 @@
     grid-row: 3/4;
     width: fit-content;
     height: fit-content;
-    color: $color-primary-button-text;
+    color: $color-primary-blue;
     background-color: $color-primary-grey;
     padding: 0.5rem 2rem;
     border-radius: 0.5rem;
@@ -96,11 +85,7 @@
     &__comments {
       grid-column: 1/2;
       grid-row: 4/5;
-      // align-self: center;
-      // justify-self: center;
-      // place-self: center;
-      // width: fit-content;
-      // height: fit-content;
+
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -113,7 +98,7 @@
       & div {
         font-size: 1.5rem;
         font-weight: 700;
-        color: $color-primary-header;
+        color: $color-primary-blue-dark;
       }
     }
   }

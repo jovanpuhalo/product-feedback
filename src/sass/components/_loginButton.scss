@@ -6,8 +6,4 @@
   justify-content: center;
   align-items: center;
   grid-column: feedbackBoard-start/feedbackBoard-end;
-
-  @include respond(breakpoint2) {
-    // display: none;
-  }
 }

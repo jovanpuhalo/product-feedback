@@ -5,7 +5,7 @@
   height: 5.3rem;
   background-color: $color-primary-grey;
   border-radius: 1rem;
-  color: $color-primary-button-text;
+  color: $color-primary-blue;
   padding: 0.81rem 0;
   font-size: 1.3rem;
   font-weight: 700;
@@ -28,20 +28,20 @@
   }
 
   &:hover {
-    background-color: $color-primary-button-hover;
+    background-color: $color-primary-blue-hover;
     translate: 0 -2px;
   }
 
   &__icon {
     font-size: 2rem;
-    color: $color-primary-button-text;
+    color: $color-primary-blue;
   }
 
   &__active {
-    background-color: $color-primary-button-text;
+    background-color: $color-primary-blue;
     color: $color-white;
     &:hover {
-      background-color: rgba($color-primary-button-text, 0.7);
+      background-color: rgba($color-primary-blue, 0.7);
     }
   }
 

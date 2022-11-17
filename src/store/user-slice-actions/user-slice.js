@@ -8,7 +8,6 @@ const userSlice = createSlice({
   },
   reducers: {
     setUser(state, action) {
-      console.log("Stigao user", action.payload);
       state.user = action.payload;
     },
     setUserIsUpdating(state, action) {

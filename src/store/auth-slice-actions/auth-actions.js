@@ -40,7 +40,6 @@ export const login = (email, password) => {
 export const getCurrentSignInUser = (uid) => {
   return async (dispatch) => {
     const user = await getUser(uid);
-    console.log("pribavljen USER", user);
 
     const data = {
       userId: uid,

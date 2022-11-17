@@ -12,7 +12,6 @@ import { motion, useAnimation } from "framer-motion";
 
 const Feedback = ({ item, clickable }) => {
   const [showMore, setShowMore] = useState(false);
-  console.log("feedback renderujem", showMore);
   const [user, setUser] = useState({});
   const controls = useAnimation();
   clickable === true ? controls.start(variantsFeedback.in) : controls.stop();

@@ -77,7 +77,6 @@ export const fetchGetFeedback = (feedbackId) => {
     dispatch(suggestionActions.setFeedbackIsFetching(true));
     try {
       const res = await getFeedback(feedbackId);
-      console.log("res feedback", res);
 
       dispatch(suggestionActions.setOpenedFeedback(res));
       dispatch(suggestionActions.setFeedbackIsFetching(false));
@@ -108,7 +107,6 @@ export const fetchUpdateFeedbackVotes = (method, data) => {
   return async (dispatch) => {
     try {
       dispatch(suggestionActions.setFeedbackIsUpdating(true)); //1
-      console.log("dispatchujem", data.id);
       await updateFeedbackVote(method, data.id); //2 wait
 
       dispatch(suggestionActions.updateFeedback({ message: "voted", data })); //3

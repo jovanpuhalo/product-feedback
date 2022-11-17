@@ -9,7 +9,6 @@ const Suggestions = () => {
   const filteredSuggestions = useSelector((state) => state.suggestionsReducer.filteredSuggestions);
   const feedbackIsFetching = useSelector((state) => state.suggestionsReducer.feedbackIsFetching);
   const loading = useSelector((state) => state.suggestionsReducer.loading);
-  console.log("suggestions se renderuje", feedbackIsFetching);
 
   const suggestions = filteredSuggestions
     .filter((item) => {
